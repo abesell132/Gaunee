@@ -1,7 +1,7 @@
 {
-  "name": "JWT Boilerplate",
+  "name": "Gaunee",
   "version": "1.0.0",
-  "description": "Node.js JWT Authentication boilerplate with input validation.",
+  "description": "Dynamic Web Application for managing apartments and rentals",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
