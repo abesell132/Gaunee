@@ -1,7 +1,7 @@
 {
   "name": "Gaunee",
   "version": "1.0.0",
-  "description": "Dynamic Web Application for managing apartments and rentals",
+  "description": "Progressive Web Application for managing apartments and rentals",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
