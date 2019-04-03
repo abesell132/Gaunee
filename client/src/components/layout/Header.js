@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logUserOut } from "../../actions/authActions";
+import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Header extends Component {
   onLogoutClick(e) {
     e.preventDefault();
+    this.props.clearCurrentProfile();
     this.props.logUserOut();
   }
   render() {
@@ -40,7 +42,7 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-light mb-4">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/dashboard">
             GAUNEE
           </Link>
           <button
@@ -55,7 +57,7 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/dashboard">
                   {" "}
                   apartments
                 </Link>
@@ -80,5 +82,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logUserOut }
+  { logUserOut, clearCurrentProfile }
 )(Header);

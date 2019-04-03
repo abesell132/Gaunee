@@ -6,6 +6,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser } from "./actions/authActions";
 import { logUserOut } from "./actions/authActions";
 
+import Dashboard from "./components/dashboard/Dashboard";
 import Header from "./components/layout/Header";
 import Landing from "./components/layout/Landing";
 
@@ -14,6 +15,7 @@ import Register from "./components/auth/Register";
 import store from "./store";
 // import Footer from "./components/layout/Footer";
 import "./App.css";
+import { clearCurrentProfile } from "./actions/profileActions";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -27,6 +29,7 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //Logout user
     store.dispatch(logUserOut());
+    store.dispatch(clearCurrentProfile());
     window.location.href = "/login";
   }
 }
@@ -42,6 +45,7 @@ class App extends Component {
             <Route path="/" component={Landing} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/register" component={Register} exact />
+            <Route path="/dashboard" component={Dashboard} exact />
             {/* <Landing /> */}
             {/* <Footer /> */}
           </div>
