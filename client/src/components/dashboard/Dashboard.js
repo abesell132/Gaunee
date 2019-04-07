@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
-import favicon from "../../img/favicon.png";
-import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
+// import { Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profileActions";
 import { connect } from "react-redux";
-import ApartmentMap from "./Map";
 
-const AnyReactComponent = ({ text }) => (
-  <div>
-    <img src={favicon} />
-  </div>
-);
+import("./sidebar.css");
 
 class Dashboard extends Component {
   static defaultProps = {
@@ -21,53 +16,31 @@ class Dashboard extends Component {
     },
     zoom: 11
   };
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.props.getCurrentProfile();
   }
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
   render() {
-    const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
     let dashboardContent;
 
     if (profile === null || loading) {
-      dashboardContent = (
-        <h4>
-          <Spinner />
-        </h4>
-      );
+      dashboardContent = <Spinner />;
     } else {
-      //check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>;
+        dashboardContent = <Sidebar />;
       } else {
         // User is logged in but has no profile
-        dashboardContent = (
-          <div>
-            <ApartmentMap />
-            <p>You have not yet setup a profile, please add some info</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create Profile
-            </Link>
-          </div>
-        );
+        this.props.history.push("/create-profile");
       }
     }
 
-    return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{dashboardContent}</div>
-          </div>
-        </div>
-      </div>
-    );
+    return <div className="dashboard">{dashboardContent}</div>;
   }
 }
 

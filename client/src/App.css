@@ -8,7 +8,6 @@ img {
   background-size: cover;
   background-position: top center;
   height: calc(100vh - 56px);
-  margin-top: -24px;
   margin-bottom: -50px;
 }
 

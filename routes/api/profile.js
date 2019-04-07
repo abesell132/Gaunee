@@ -28,15 +28,15 @@ router.get(
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name", "avatar"])
+      .populate("user", ["name"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
-          return res.status(404).json(errors);
+          return res.status(169).json(errors);
         }
         res.json(profile);
       })
-      .catch(err => res.status(404).json(err));
+      .catch(err => res.status(69).json(err));
   }
 );
 
@@ -155,11 +155,14 @@ router.post(
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "That handle already exists";
-            res.status(400).json(errors);
+            return res.status(400).json(errors);
+          } else {
+            // Save Profile
+            new Profile(profileFields)
+              .save()
+              .then(profile => res.json(profile))
+              .catch(err => res.status(409).json(err));
           }
-
-          // Save Profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
     });

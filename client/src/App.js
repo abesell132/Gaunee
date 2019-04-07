@@ -1,21 +1,28 @@
+//Packages
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
-import { logUserOut } from "./actions/authActions";
 
+//Components
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import Header from "./components/layout/Header";
 import Landing from "./components/layout/Landing";
+import PrivateRoute from "./components/common/PrivateRoute";
+import CreateProfile from "./components/create-profile/CreateProfile";
 
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
+//Redux
 import store from "./store";
-// import Footer from "./components/layout/Footer";
-import "./App.css";
+import { setCurrentUser } from "./actions/authActions";
+import { logUserOut } from "./actions/authActions";
 import { clearCurrentProfile } from "./actions/profileActions";
+// import Footer from "./components/layout/Footer";
+
+//CSS
+import "./App.css";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -45,9 +52,14 @@ class App extends Component {
             <Route path="/" component={Landing} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/register" component={Register} exact />
-            <Route path="/dashboard" component={Dashboard} exact />
-            {/* <Landing /> */}
-            {/* <Footer /> */}
+            <Switch>
+              <PrivateRoute path="/dashboard" component={Dashboard} exact />
+            </Switch>
+            <PrivateRoute
+              path="/create-profile"
+              component={CreateProfile}
+              exact
+            />
           </div>
         </Router>
       </Provider>

@@ -3,12 +3,8 @@ import spinner from "../../img/spinner.gif";
 
 export default function Spinner() {
   return (
-    <div>
-      <img
-        src={spinner}
-        alt="Loading..."
-        style={{ width: "80px", margin: "auto", display: "block" }}
-      />
+    <div className="spinner-container">
+      <img src={spinner} alt="Loading..." />
     </div>
   );
 }

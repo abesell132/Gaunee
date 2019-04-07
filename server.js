@@ -9,7 +9,12 @@ const profile = require("./routes/api/profile");
 const apartments = require("./routes/api/apartments");
 
 const app = express();
+
+// var corsOptions = {
+//   origin: "*"
+// };
 app.use(cors());
+// app.options("*", cors(corsOptionsDelegate));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +25,7 @@ const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(db)
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
