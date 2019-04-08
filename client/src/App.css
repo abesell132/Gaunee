@@ -1,3 +1,7 @@
+body {
+  overflow: hidden !important;
+}
+
 img {
   width: 100%;
 }
@@ -99,6 +103,19 @@ hr {
   max-width: 70%;
 }
 
-.nav-item:hover {
-  cursor: pointer;
+.dashboard-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.content-container {
+  width: calc(100vw - 300px);
+}
+.create-profile {
+  overflow-y: scroll;
+  height: calc(100vh - 56px);
+}
+
+.flex {
+  display: flex;
 }

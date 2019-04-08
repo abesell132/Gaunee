@@ -19,6 +19,7 @@ import store from "./store";
 import { setCurrentUser } from "./actions/authActions";
 import { logUserOut } from "./actions/authActions";
 import { clearCurrentProfile } from "./actions/profileActions";
+
 // import Footer from "./components/layout/Footer";
 
 //CSS
@@ -52,14 +53,17 @@ class App extends Component {
             <Route path="/" component={Landing} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/register" component={Register} exact />
+
             <Switch>
-              <PrivateRoute path="/dashboard" component={Dashboard} exact />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
             </Switch>
-            <PrivateRoute
-              path="/create-profile"
-              component={CreateProfile}
-              exact
-            />
+            <Switch>
+              <PrivateRoute
+                path="/create-profile"
+                component={CreateProfile}
+                exact
+              />
+            </Switch>
           </div>
         </Router>
       </Provider>

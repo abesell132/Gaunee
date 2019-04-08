@@ -1,39 +1,59 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import Messages from "./Messages";
+import DashboardLanding from "./DashboardLanding";
 // import { Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profileActions";
+import { getProperties } from "../../actions/propertyActions";
 import { connect } from "react-redux";
 
 import("./sidebar.css");
 
 class Dashboard extends Component {
-  static defaultProps = {
-    center: {
-      lat: 46.499102,
-      lng: -87.611803
-    },
-    zoom: 11
-  };
+  constructor(props) {
+    super(props);
+
+    this.updateDashboard = this.updateDashboard.bind(this);
+  }
   UNSAFE_componentWillMount() {
     this.props.getCurrentProfile();
+    this.props.getProperties();
   }
   UNSAFE_componentWillReceiveProps() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
+
+  updateDashboard() {}
+
   render() {
     const { profile, loading } = this.props.profile;
 
     let dashboardContent;
 
     if (profile === null || loading) {
-      dashboardContent = <Spinner />;
+      dashboardContent = (
+        <div>
+          <Spinner />
+        </div>
+      );
     } else {
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <Sidebar />;
+        dashboardContent = (
+          <div className="dashboard-wrapper">
+            <Router>
+              <Sidebar />
+              <div className="content-container">
+                <Route path="/dashboard/messages" component={Messages} exact />
+                <Route path="/dashboard/" component={DashboardLanding} exact />
+              </div>
+            </Router>
+          </div>
+        );
       } else {
         // User is logged in but has no profile
         this.props.history.push("/create-profile");
@@ -46,16 +66,18 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getProperties: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  properties: state.properties,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, getProperties }
 )(Dashboard);
