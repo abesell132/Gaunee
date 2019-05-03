@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 class MainNavIcon extends Component {
@@ -10,6 +13,7 @@ class MainNavIcon extends Component {
       activeItem: this.props.activeItem,
       icon: this.props.icon,
       onClick: this.props.onClick,
+      location: this.props.location,
       isActive: false
     };
   }
@@ -41,15 +45,19 @@ class MainNavIcon extends Component {
 
   render() {
     return (
-      <div
-        className={classnames("main-nav-icon", {
-          "icon-active": this.state.isActive
-        })}
-        id={this.state.name}
-        onClick={this.state.onClick}
-      >
-        <i className={this.state.icon} id={this.state.name} />
-        <div>{this.state.name}</div>
+      <div>
+        <Link to={this.props.location}>
+          <div
+            className={classnames("main-nav-icon", {
+              "icon-active": this.state.isActive
+            })}
+            id={this.state.name}
+            onClick={this.state.onClick}
+          >
+            <i className={this.state.icon} id={this.state.name} />
+            <div>{this.state.name}</div>
+          </div>
+        </Link>
       </div>
     );
   }
@@ -59,7 +67,8 @@ MainNavIcon.propTypes = {
   name: PropTypes.string.isRequired,
   activeItem: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired
 };
 
 export default MainNavIcon;

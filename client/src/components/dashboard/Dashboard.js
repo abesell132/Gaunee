@@ -4,10 +4,17 @@ import Spinner from "../common/Spinner";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Messages from "./Messages";
+import Settings from "./Settings";
+import Finances from "./Finances";
+import Properties from "../properties/Properties";
+import AddProperty from "../properties/AddProperty";
+
 import DashboardLanding from "./DashboardLanding";
 // import { Link } from "react-router-dom";
-import { getCurrentProfile } from "../../actions/profileActions";
+
+import { updateActivePage } from "../../actions/siteMetaActions";
 import { getProperties } from "../../actions/propertyActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import { connect } from "react-redux";
 
 import("./sidebar.css");
@@ -23,41 +30,48 @@ class Dashboard extends Component {
     this.props.getProperties();
   }
   UNSAFE_componentWillReceiveProps() {
+    this.props.updateActivePage("Dashboard");
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
   }
-
   updateDashboard() {}
 
   render() {
-    const { profile, loading } = this.props.profile;
+    const { loading } = this.props.profile;
 
     let dashboardContent;
 
-    if (profile === null || loading) {
+    if (loading) {
       dashboardContent = (
         <div>
           <Spinner />
         </div>
       );
     } else {
-      if (Object.keys(profile).length > 0) {
-        dashboardContent = (
-          <div className="dashboard-wrapper">
-            <Router>
-              <Sidebar />
-              <div className="content-container">
-                <Route path="/dashboard/messages" component={Messages} exact />
-                <Route path="/dashboard/" component={DashboardLanding} exact />
-              </div>
-            </Router>
-          </div>
-        );
-      } else {
-        // User is logged in but has no profile
-        this.props.history.push("/create-profile");
-      }
+      dashboardContent = (
+        <div className="dashboard-wrapper">
+          <Router>
+            <Sidebar history={this.props.history} />
+            <div className="content-container">
+              <Route path="/dashboard/" component={DashboardLanding} exact />
+              <Route path="/dashboard/messages" component={Messages} exact />
+              <Route path="/dashboard/settings" component={Settings} exact />
+              <Route path="/dashboard/finances" component={Finances} exact />
+              <Route
+                path="/dashboard/properties"
+                component={Properties}
+                exact
+              />
+              <Route
+                path="/dashboard/properties/add"
+                component={AddProperty}
+                exact
+              />
+            </div>
+          </Router>
+        </div>
+      );
     }
 
     return <div className="dashboard">{dashboardContent}</div>;
@@ -67,6 +81,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getProperties: PropTypes.func.isRequired,
+  updateActivePage: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -74,10 +89,11 @@ Dashboard.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile,
   properties: state.properties,
-  auth: state.auth
+  auth: state.auth,
+  siteMeta: state.siteMata
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, getProperties }
+  { getCurrentProfile, getProperties, updateActivePage }
 )(Dashboard);

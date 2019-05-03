@@ -5,6 +5,10 @@ body {
 img {
   width: 100%;
 }
+a:hover {
+  color: #2ecc71 !important;
+  text-decoration: none !important;
+}
 
 .landing {
   position: relative;
@@ -118,4 +122,113 @@ hr {
 
 .flex {
   display: flex;
+}
+
+.sidebar-search-form {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 3px 5px;
+  border: none;
+  display: none;
+}
+
+.search-properties {
+  display: block;
+}
+
+.dashboard-content {
+  width: calc(100vw - 300px);
+  height: calc(100vh - 111px);
+  background: #f3f5f9;
+  padding: 20px;
+}
+
+.heading-row {
+  height: 55px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+  padding: 0 10px;
+}
+.heading-row h1,
+.heading-row h1 a {
+  font-family: "Roboto";
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  color: #999;
+}
+.heading-row h1 a:hover {
+  text-decoration: none;
+  color: #2ecc71;
+}
+.heading-row h1 strong {
+  color: #666;
+  font-weight: 500 !important;
+}
+
+.bottom-row-container {
+  height: 100%;
+  display: flex;
+}
+
+.dashboard-content .expenses {
+  display: inline-block;
+  background: white;
+  margin-right: 10px;
+  height: 50%;
+  width: calc(50% - 10px);
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.dashboard-content .expenses p {
+  text-align: left;
+  font-size: 17px;
+
+  line-height: 1;
+  margin: 0;
+  padding: 12.5px 20px;
+  border-bottom: 1px solid #dedede;
+}
+.dashboard-content .expenses p a {
+  color: #777;
+}
+.dashboard-content .expenses .expenses-chart {
+  height: calc(100% - 42px);
+  padding: 20px;
+}
+.expenses-chart tspan {
+  font-size: 14px;
+}
+.dashboard-placeholder {
+  height: 50%;
+  width: 100%;
+}
+.quick-facts-container {
+  display: inline-block;
+  margin-left: 10px;
+  height: 50%;
+  width: calc(20% - 10px);
+}
+.quick-facts {
+  display: inline-block;
+  width: 100%;
+  height: 25%;
+  padding: 7px;
+}
+.quick-facts div {
+  background: red;
+  height: 100%;
+}
+
+.change-this-classname-later {
+  width: calc(30% - 20px);
+  background: white;
+  margin: 0 10px;
+  height: 50%;
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }

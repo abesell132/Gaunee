@@ -10,10 +10,7 @@ const ApartmentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  tenant: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  },
+
   address1: {
     type: String,
     required: true
@@ -37,7 +34,29 @@ const ApartmentSchema = new Schema({
   country: {
     type: String,
     default: "United States"
-  }
+  },
+  unit: [
+    {
+      rent: {
+        type: Number,
+        required: true
+      },
+      baths: {
+        type: Number
+      },
+      beds: {
+        type: Number
+      },
+      squareFeet: {
+        type: Number
+      },
+
+      tenant: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ]
 });
 
 module.exports = Apartment = mongoose.model("apartments", ApartmentSchema);

@@ -22,6 +22,8 @@ export const createProfile = (profileData, history) => dispatch => {
     .then(res => {
       console.log(res);
       history.push("/dashboard");
+      history.push("/dashboard");
+      history.push("/dashboard");
     })
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

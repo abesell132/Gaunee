@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PROPERTIES, GET_ERRORS } from "./types";
+import { GET_PROPERTIES } from "./types";
 
 export const getProperties = () => dispatch => {
   axios

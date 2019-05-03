@@ -4,9 +4,9 @@ import { updateActivePage } from "../../actions/siteMetaActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-class Messages extends Component {
+class Settings extends Component {
   UNSAFE_componentWillMount() {
-    this.props.updateActivePage("Messages");
+    this.props.updateActivePage("Settings");
   }
   render() {
     return (
@@ -14,7 +14,7 @@ class Messages extends Component {
         <div className="heading-row">
           <h1>
             <Link to="/dashboard">Dashboard</Link> <small>></small>{" "}
-            <strong>Messages</strong>
+            <strong>Settings</strong>
           </h1>
         </div>
         <div className="dashboard-content" />
@@ -23,7 +23,7 @@ class Messages extends Component {
   }
 }
 
-Messages.propTypes = {
+Settings.propTypes = {
   updateActivePage: PropTypes.func.isRequired
 };
 
@@ -37,4 +37,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { updateActivePage }
-)(Messages);
+)(Settings);
