@@ -7,6 +7,7 @@ var cors = require("cors");
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const apartments = require("./routes/api/apartments");
+const messages = require("./routes/api/messages");
 
 const app = express();
 
@@ -39,6 +40,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/apartments", apartments);
+app.use("/api/messages", messages);
 
 const port = process.env.PORT || 5000;
 
