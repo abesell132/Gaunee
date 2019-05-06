@@ -1,0 +1,53 @@
+.addons {
+  width: calc(30% - 20px);
+  background: white;
+  margin: 10px 10px 0;
+  height: calc(50% - 10px);
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.dashboard-content .addons p {
+  text-align: left;
+  font-size: 17px;
+  line-height: 1;
+  margin: 0;
+  padding: 12.5px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+.dashboard-content .addons p a {
+  color: #777;
+}
+
+.addons-content {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 42px);
+  align-items: center;
+}
+
+.addons-content h4,
+.addons-content {
+  text-align: center;
+}
+.addons-content h4 {
+  margin-bottom: 10px;
+}
+.addons-content span:not(.navbar-brand) {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.browse-addons-button {
+  background: #2ecc71;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 17px;
+}
+.browse-addons-button:hover {
+  background: #27ae60;
+}

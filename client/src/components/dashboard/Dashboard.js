@@ -2,23 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import Messages from "./Messages";
-import Settings from "./Settings";
-import Finances from "./Finances";
+import Sidebar from "./Sidebar/Sidebar";
+import Messages from "./Messages/Messages";
+import Settings from "./Settings/Settings";
+import Finances from "./Finances/Finances";
 import Properties from "../properties/Properties";
-import Addons from "./Addons";
+import Addons from "./Addons/Addons";
 import AddProperty from "../properties/AddProperty";
-
-import DashboardLanding from "./DashboardLanding";
-// import { Link } from "react-router-dom";
+import DashboardLanding from "./Dashboard/DashboardLanding";
 
 import { updateActivePage } from "../../actions/siteMetaActions";
 import { getProperties } from "../../actions/propertyActions";
 import { getCurrentProfile } from "../../actions/profileActions";
 import { connect } from "react-redux";
-
-import("./sidebar.css");
 
 class Dashboard extends Component {
   constructor(props) {

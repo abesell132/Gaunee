@@ -3,11 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
-import InputGroup from "../common/InputGroup";
 import { createProfile } from "../../actions/profileActions";
-import { FieldArray } from "redux-form";
 import update from "react-addons-update";
 
 class AddProperty extends Component {

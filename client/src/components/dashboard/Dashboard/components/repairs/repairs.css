@@ -1,0 +1,40 @@
+.repairs-box .change-later p {
+  text-align: left;
+  font-size: 17px;
+  line-height: 1;
+  margin: 0;
+  padding: 12.5px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+.repairs-box .change-later p a {
+  color: #777;
+}
+.repairs-box:first-of-type {
+  height: calc(50% - 10px);
+  width: calc(33.33% - 10px);
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background: white;
+}
+.repairs-box:nth-of-type(2) {
+  height: calc(50% - 10px);
+  width: calc(33.33% - 20px);
+  display: inline-block;
+  margin: 0 10px;
+  margin-bottom: 10px;
+  background: white;
+}
+.repairs-box:nth-of-type(3) {
+  height: calc(50% - 10px);
+  width: calc(33% - 10px);
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  background: white;
+}
+.repairs-box {
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
