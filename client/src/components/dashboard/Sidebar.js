@@ -106,6 +106,13 @@ class Sidebar extends Component {
           />
           <MainNavItem
             activeItem={this.state.activeItem}
+            name="Addons"
+            icon="fas fa-box-open"
+            location="/dashboard/addons"
+            onClick={this.onClick}
+          />
+          <MainNavItem
+            activeItem={this.state.activeItem}
             name="Settings"
             icon="fa fa-cog"
             location="/dashboard/settings"

@@ -7,6 +7,7 @@ import Messages from "./Messages";
 import Settings from "./Settings";
 import Finances from "./Finances";
 import Properties from "../properties/Properties";
+import Addons from "./Addons";
 import AddProperty from "../properties/AddProperty";
 
 import DashboardLanding from "./DashboardLanding";
@@ -63,6 +64,7 @@ class Dashboard extends Component {
                 component={Properties}
                 exact
               />
+              <Route path="/dashboard/addons" component={Addons} exact />
               <Route
                 path="/dashboard/properties/add"
                 component={AddProperty}

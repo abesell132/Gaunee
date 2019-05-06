@@ -45,32 +45,6 @@ class CreateProfile extends Component {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   }
-  // onKeyDown(e) {
-  //   if (e.key === "Enter") {
-  //     this.setState({
-  //       errors: {}
-  //     });
-  //     const profileData = {
-  //       handle: this.state.handle,
-  //       company: this.state.company,
-  //       website: this.state.website,
-  //       location: this.state.location,
-  //       status: this.state.status,
-  //       skills: this.state.skills,
-  //       githubusername: this.state.githubusername,
-  //       bio: this.state.bio,
-  //       twitter: this.state.twitter,
-  //       facebook: this.state.facebook,
-  //       linkedin: this.state.linkedin,
-  //       youtube: this.state.youtube,
-  //       instagram: this.state.instagram
-  //     };
-
-  //     this.props.createProfile(profileData, this.props.history);
-  //     this.props.history.push("/dashboard");
-  //     e.preventDefault();
-  //   }
-  // }
 
   onSubmit(e) {
     this.setState(

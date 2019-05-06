@@ -10,7 +10,10 @@ const ApartmentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-
+  name: {
+    type: String,
+    required: false
+  },
   address1: {
     type: String,
     required: true

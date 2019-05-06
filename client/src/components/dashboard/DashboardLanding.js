@@ -68,7 +68,21 @@ class DashboardLanding extends Component {
         </div>
 
         <div className="dashboard-content">
-          <div className="dashboard-placeholder" />
+          <div className="dashboard-placeholder">
+            <div className="change-later">
+              <p>Messages</p>
+            </div>
+          </div>
+          <div className="dashboard-placeholder">
+            <div className="change-later">
+              <p>Repairs</p>
+            </div>
+          </div>
+          <div className="dashboard-placeholder">
+            <div className="change-later">
+              <p>Properties</p>
+            </div>
+          </div>
           <div class="bottom-row-container">
             <div className="expenses">
               <p>
@@ -134,19 +148,78 @@ class DashboardLanding extends Component {
                 </ResponsiveContainer>
               </div>
             </div>
-            <div className="change-this-classname-later" />
+            <div className="addons">
+              <p>
+                <Link to="/dashboard/finances">Addons</Link>
+              </p>
+              <div className="addons-content">
+                <div>
+                  <h4>
+                    Enhance{" "}
+                    <span class="navbar-brand no-padding vertical-align-top inherit-font-size">
+                      Gaunee
+                    </span>{" "}
+                    with Add-ons
+                  </h4>
+                  <span>
+                    Get even more out of your Gaunee subscription! Add features
+                    such as traslation, in-app rent payments, SMS integration,
+                    and more!
+                  </span>
+                  <div>
+                    <Link to="/dashboard/addons">
+                      <button class=" browse-addons-button">
+                        Browse Add-ons
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="quick-facts-container">
-              <div class="quick-facts">
-                <div>asfasdf</div>
+              <div class="quick-facts" id="messages">
+                <div className="icon-container">
+                  <i class="fas fa-inbox" />
+                </div>
+                <div className="text-container">
+                  <div>
+                    <h3>2</h3>
+                    <p>Unread Messages</p>
+                  </div>
+                </div>
               </div>
-              <div class="quick-facts">
-                <div>asfasdf</div>
+              <div class="quick-facts" id="repairs">
+                <div className="icon-container">
+                  <i class="fas fa-tools" />
+                </div>
+                <div className="text-container">
+                  <div>
+                    <h3>3</h3>
+                    <p>Repairs Requested</p>
+                  </div>
+                </div>
               </div>
-              <div class="quick-facts">
-                <div>asfasdf</div>
+              <div class="quick-facts" id="tenants">
+                <div className="icon-container">
+                  <i class="fas fa-users" />
+                </div>
+                <div className="text-container">
+                  <div>
+                    <h3>14</h3>
+                    <p>Tenants Serviced</p>
+                  </div>
+                </div>
               </div>
-              <div class="quick-facts">
-                <div>asfasdf</div>
+              <div class="quick-facts" id="units">
+                <div className="icon-container">
+                  <i class="fas fa-building" />
+                </div>
+                <div className="text-container">
+                  <div>
+                    <h3>7</h3>
+                    <p>Units Managed</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
