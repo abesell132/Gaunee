@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 class Messages extends Component {
   UNSAFE_componentWillMount() {
-    this.props.updateActivePage("Messages");
+    this.props.updateActivePage("Message Center");
   }
   render() {
     return (

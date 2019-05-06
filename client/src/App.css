@@ -209,7 +209,8 @@ hr {
   border-bottom: 1px solid #dedede;
 }
 .dashboard-content .expenses p a,
-.dashboard-content .addons p a {
+.dashboard-content .addons p a,
+.dashboard-placeholder .change-later p a {
   color: #777;
 }
 .dashboard-content .expenses .expenses-chart {

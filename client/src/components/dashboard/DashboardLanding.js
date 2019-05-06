@@ -70,17 +70,23 @@ class DashboardLanding extends Component {
         <div className="dashboard-content">
           <div className="dashboard-placeholder">
             <div className="change-later">
-              <p>Messages</p>
+              <p>
+                <Link to="/dashboard/messages">Message Center</Link>
+              </p>
             </div>
           </div>
           <div className="dashboard-placeholder">
             <div className="change-later">
-              <p>Repairs</p>
+              <p>
+                <Link to="/dashboard/messages">Repairs</Link>
+              </p>
             </div>
           </div>
           <div className="dashboard-placeholder">
             <div className="change-later">
-              <p>Properties</p>
+              <p>
+                <Link to="/dashboard/properties">Properties</Link>
+              </p>
             </div>
           </div>
           <div class="bottom-row-container">
@@ -150,7 +156,7 @@ class DashboardLanding extends Component {
             </div>
             <div className="addons">
               <p>
-                <Link to="/dashboard/finances">Addons</Link>
+                <Link to="/dashboard/addons">Addons</Link>
               </p>
               <div className="addons-content">
                 <div>

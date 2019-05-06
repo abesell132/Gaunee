@@ -91,6 +91,7 @@
   font-weight: 400;
   top: 50%;
   line-height: 1;
+  white-space: nowrap;
   opacity: 0;
   letter-spacing: -0.5px;
 }

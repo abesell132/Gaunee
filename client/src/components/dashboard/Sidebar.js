@@ -99,7 +99,7 @@ class Sidebar extends Component {
           />
           <MainNavItem
             activeItem={this.state.activeItem}
-            name="Messages"
+            name="Message Center"
             icon="fa fa-comments"
             location="/dashboard/messages"
             onClick={this.onClick}
