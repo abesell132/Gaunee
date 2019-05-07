@@ -130,16 +130,22 @@ class AddProperty extends Component {
           zipcode: this.state.zipcode,
           units: this.state.units
         };
-        this.setState({
-          address1: "",
-          address2: "",
-          city: "",
-          state: "",
-          zipcode: "",
-          units: []
-        });
-        this.props.addProperty(propertyData);
-        this.props.getProperties();
+        this.setState(
+          {
+            address1: "",
+            address2: "",
+            city: "",
+            state: "",
+            zipcode: "",
+            units: []
+          },
+          () => {
+            this.props.addProperty(propertyData);
+            this.props.getProperties();
+            this.props.getProperties();
+            this.props.getProperties();
+          }
+        );
       }
     );
 
