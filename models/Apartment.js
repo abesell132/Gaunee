@@ -55,7 +55,7 @@ const ApartmentSchema = new Schema({
       },
       tenant: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: "tenant"
       }
     }
   ]

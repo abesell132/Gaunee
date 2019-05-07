@@ -15,6 +15,15 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  isTenant: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  tenantID: {
+    type: Schema.Types.ObjectId,
+    ref: "tenants"
+  },
   date: {
     type: Date,
     default: Date.now
