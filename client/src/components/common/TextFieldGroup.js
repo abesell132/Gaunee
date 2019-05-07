@@ -17,6 +17,7 @@ function TextFieldGroup({
 }) {
   return (
     <div className="form-group">
+      <span className="input-label">{label}</span>
       <input
         type={type}
         className={classnames(" form-control form-control-lg", {

@@ -4,14 +4,15 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
-import { createProfile } from "../../actions/profileActions";
 import update from "react-addons-update";
+import { addProperty, getProperties } from "../../actions/propertyActions";
+
+import "./add-property.css";
 
 class AddProperty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      repeaterFieldContent: "",
       address1: "",
       address2: "",
       city: "",
@@ -24,6 +25,8 @@ class AddProperty extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.addUnit = this.addUnit.bind(this);
     this.onChangeOfRepeaterField = this.onChangeOfRepeaterField.bind(this);
+    this.deleteUnit = this.deleteUnit.bind(this);
+
     // this.onKeyDown = this.onKeyDown.bind(this);
   }
 
@@ -47,6 +50,16 @@ class AddProperty extends Component {
       units: [...prevState.units, newelement]
     }));
   }
+  deleteUnit(e) {
+    const index = parseInt(e.currentTarget.name);
+    const filteredItems = this.state.units
+      .slice(0, index)
+      .concat(this.state.units.slice(index + 1, this.state.units.length));
+    console.log(filteredItems);
+    this.setState({
+      units: filteredItems
+    });
+  }
 
   onChangeOfRepeaterField(e) {
     e.preventDefault();
@@ -69,11 +82,20 @@ class AddProperty extends Component {
         });
         return;
       case "rent":
-        this.setState({
-          units: update(this.state.units, {
-            [res[1]]: { rent: { $set: e.target.value } }
-          })
-        });
+        if (this.state.units[res[1]].rent) {
+          this.setState({
+            units: update(this.state.units, {
+              [res[1]]: { rent: { $set: e.target.value } }
+            })
+          });
+        } else {
+          this.setState({
+            units: update(this.state.units, {
+              [res[1]]: { rent: { $set: `$${e.target.value}` } }
+            })
+          });
+        }
+
         return;
 
       case "squareFeet":
@@ -100,13 +122,24 @@ class AddProperty extends Component {
         errors: {}
       },
       () => {
-        const profileData = {
+        const propertyData = {
           address1: this.state.address1,
           address2: this.state.address2,
           city: this.state.city,
           state: this.state.state,
-          zipcode: this.state.zipcode
+          zipcode: this.state.zipcode,
+          units: this.state.units
         };
+        this.setState({
+          address1: "",
+          address2: "",
+          city: "",
+          state: "",
+          zipcode: "",
+          units: []
+        });
+        this.props.addProperty(propertyData);
+        this.props.getProperties();
       }
     );
 
@@ -115,42 +148,57 @@ class AddProperty extends Component {
 
   render() {
     let properties = this.state.units.map((unit, index) => (
-      <div class="row">
-        <div className="col-sm-3">
-          <TextFieldGroup
-            type="number"
-            placeholder="# of Baths"
-            name={`baths-${index}`}
-            value={this.state.units[index].baths}
-            onChange={this.onChangeOfRepeaterField}
-          />
+      <div className="unit-container">
+        <div class="row">
+          <div className="col-sm-3">
+            <TextFieldGroup
+              type="number"
+              label="# of Baths"
+              placeholder="2"
+              name={`baths-${index}`}
+              value={this.state.units[index].baths}
+              onChange={this.onChangeOfRepeaterField}
+            />
+          </div>
+          <div className="col-sm-3">
+            <TextFieldGroup
+              type="number"
+              label="# of Bedrooms"
+              placeholder="3"
+              name={`beds-${index}`}
+              value={this.state.units[index].beds}
+              onChange={this.onChangeOfRepeaterField}
+            />
+          </div>
+          <div className="col-sm-3">
+            <TextFieldGroup
+              type="text"
+              label="Rent"
+              placeholder="$450"
+              name={`rent-${index}`}
+              value={this.state.units[index].rent}
+              onChange={this.onChangeOfRepeaterField}
+            />
+          </div>
+          <div className="col-sm-3">
+            <TextFieldGroup
+              type="number"
+              label="Square Feet"
+              placeholder="2317"
+              name={`squareFeet-${index}`}
+              value={this.state.units[index].squareFeet}
+              onChange={this.onChangeOfRepeaterField}
+            />
+          </div>
         </div>
-        <div className="col-sm-3">
-          <TextFieldGroup
-            type="number"
-            placeholder="# of Beds"
-            name={`beds-${index}`}
-            value={this.state.units[index].beds}
-            onChange={this.onChangeOfRepeaterField}
-          />
-        </div>
-        <div className="col-sm-3">
-          <TextFieldGroup
-            type="number"
-            placeholder="Rent"
-            name={`rent-${index}`}
-            value={this.state.units[index].rent}
-            onChange={this.onChangeOfRepeaterField}
-          />
-        </div>
-        <div className="col-sm-3">
-          <TextFieldGroup
-            type="number"
-            placeholder="Square Feet"
-            name={`squareFeet-${index}`}
-            value={this.state.units[index].squareFeet}
-            onChange={this.onChangeOfRepeaterField}
-          />
+        <div className="button-container">
+          <button
+            className="btn btn-danger"
+            name={index}
+            onClick={this.deleteUnit}
+          >
+            Delete Unit
+          </button>
         </div>
       </div>
     ));
@@ -245,6 +293,7 @@ class AddProperty extends Component {
         label: "Massachusetts - MA",
         value: "Massachusetts"
       },
+      { label: "Michigan - MI", value: "Michigan" },
       {
         label: "Minnesota - MN",
         value: "Minnesota"
@@ -397,7 +446,7 @@ class AddProperty extends Component {
     ];
 
     return (
-      <div className="create-profile">
+      <div className="add-property">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -426,9 +475,8 @@ class AddProperty extends Component {
                   </div>
                   <div className="col-sm-4">
                     <SelectListGroup
-                      placeholder="* Status"
-                      name="status"
-                      value={this.state.status}
+                      name="state"
+                      value={this.state.state}
                       onChange={this.onChange}
                       options={options}
                       error={errors.status}
@@ -471,6 +519,8 @@ class AddProperty extends Component {
 
 AddProperty.propTypes = {
   profile: PropTypes.object.isRequired,
+  addProperty: PropTypes.func.isRequired,
+  getProperties: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -480,5 +530,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { addProperty, getProperties }
 )(withRouter(AddProperty));

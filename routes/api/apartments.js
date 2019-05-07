@@ -20,28 +20,30 @@ router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateApartmentInput(req.body);
-
-    if (!isValid) {
-      res.status(400).json(errors);
+    //Remove $ sign from Rent Submission
+    let units = req.body.units;
+    for (let i = 0; i < units.length; i++) {
+      units[i].rent = units[i].rent.replace("$", "");
     }
+
     const newApartment = new Apartment({
       owner: req.user.id,
       address1: req.body.address1,
       address2: req.body.address2,
       city: req.body.city,
       state: req.body.state,
-      zipcode: req.body.zipcode
+      zipcode: req.body.zipcode,
+      units: units
     });
-
     newApartment
       .save()
       .then(apartment => {
         res.json(apartment);
       })
       .catch(err => {
-        res.status(400).json({
-          errror: err
+        console.log(err);
+        res.status(402).json({
+          error: err
         });
       });
   }

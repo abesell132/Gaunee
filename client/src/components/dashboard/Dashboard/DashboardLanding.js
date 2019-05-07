@@ -12,6 +12,7 @@ import QuickFact from "./components/quick-facts/QuickFact";
 
 import "./components/finances/finances.css";
 import "./components/addons/addons.css";
+import "./components/quick-facts/quickfacts.css";
 
 class DashboardLanding extends Component {
   UNSAFE_componentWillMount() {
@@ -32,40 +33,30 @@ class DashboardLanding extends Component {
             <FinanceChart />
             <AddonsBox />
             <div className="quick-facts-container">
-              <QuickFact />
-              <div class="quick-facts" id="repairs">
-                <div className="icon-container">
-                  <i class="fas fa-tools" />
-                </div>
-                <div className="text-container">
-                  <div>
-                    <h3>3</h3>
-                    <p>Repairs Requested</p>
-                  </div>
-                </div>
-              </div>
-              <div class="quick-facts" id="tenants">
-                <div className="icon-container">
-                  <i class="fas fa-users" />
-                </div>
-                <div className="text-container">
-                  <div>
-                    <h3>14</h3>
-                    <p>Tenants Serviced</p>
-                  </div>
-                </div>
-              </div>
-              <div class="quick-facts" id="units">
-                <div className="icon-container">
-                  <i class="fas fa-building" />
-                </div>
-                <div className="text-container">
-                  <div>
-                    <h3>7</h3>
-                    <p>Units Managed</p>
-                  </div>
-                </div>
-              </div>
+              <QuickFact
+                name="messages"
+                icon="fas fa-inbox"
+                number="2"
+                text="Unread Messages"
+              />
+              <QuickFact
+                name="repairs"
+                icon="fas fa-tools"
+                number="3"
+                text="Repairs Requested"
+              />
+              <QuickFact
+                name="tenants"
+                icon="fas fa-users"
+                number="14"
+                text="Tenants Serviced"
+              />
+              <QuickFact
+                name="units"
+                icon="fas fa-building"
+                number="7"
+                text="Units Managed"
+              />
             </div>
           </div>
         </div>

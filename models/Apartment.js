@@ -38,7 +38,7 @@ const ApartmentSchema = new Schema({
     type: String,
     default: "United States"
   },
-  unit: [
+  units: [
     {
       rent: {
         type: Number,
@@ -53,7 +53,6 @@ const ApartmentSchema = new Schema({
       squareFeet: {
         type: Number
       },
-
       tenant: {
         type: Schema.Types.ObjectId,
         ref: "users"

@@ -9,3 +9,12 @@ export const getProperties = () => dispatch => {
       console.log(err);
     });
 };
+
+export const addProperty = apartmentData => dispatch => {
+  axios
+    .post("/api/apartments/create", apartmentData)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err));
+};
