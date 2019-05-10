@@ -29,7 +29,7 @@ class DashboardLanding extends Component {
           <MessageCenter />
           <RepairsBox />
           <PropertiesBox />
-          <div class="bottom-row-container">
+          <div className="bottom-row-container">
             <FinanceChart />
             <AddonsBox />
             <div className="quick-facts-container">

@@ -12,7 +12,7 @@ class AddonsBox extends Component {
           <div>
             <h4>
               Enhance{" "}
-              <span class="navbar-brand no-padding vertical-align-top inherit-font-size">
+              <span className="navbar-brand no-padding vertical-align-top inherit-font-size">
                 Gaunee
               </span>{" "}
               with Add-ons
@@ -23,7 +23,9 @@ class AddonsBox extends Component {
             </span>
             <div>
               <Link to="/dashboard/addons">
-                <button class=" browse-addons-button">Browse Add-ons</button>
+                <button className=" browse-addons-button">
+                  Browse Add-ons
+                </button>
               </Link>
             </div>
           </div>

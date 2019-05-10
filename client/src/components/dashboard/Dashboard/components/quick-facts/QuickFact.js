@@ -12,9 +12,9 @@ class QuickFact extends Component {
   }
   render() {
     return (
-      <div class="quick-facts" id={this.state.name}>
+      <div className="quick-facts" id={this.state.name}>
         <div className="icon-container">
-          <i class={this.state.icon} />
+          <i className={this.state.icon} />
         </div>
         <div className="text-container">
           <div>

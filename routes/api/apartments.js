@@ -24,6 +24,11 @@ router.post(
     let units = req.body.units;
     for (let i = 0; i < units.length; i++) {
       units[i].rent = units[i].rent.replace("$", "");
+
+      // Grab Tenant Email Address entered
+      // Search to see if email exists
+      // YES: return ID of tenant, store in unit
+      // NO: create Tenant, store ID In Unit
     }
 
     const newApartment = new Apartment({
