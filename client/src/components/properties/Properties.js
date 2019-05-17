@@ -17,13 +17,11 @@ class Properties extends Component {
     this.onPropertyClick = this.onPropertyClick.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
-    this.props.updateActivePage("Properties");
-  }
   componentDidMount() {
     this.props.updateActivePage("Properties");
   }
   componentWillUpdate(prevProps, prevState) {
+    console.log(this.props);
     if (prevProps !== this.props) {
       if (this.props.properties.properties[0]) {
         this.setState({
@@ -41,6 +39,7 @@ class Properties extends Component {
       return false;
     }
   }
+
   onPropertyClick(e) {
     e.preventDefault();
     this.setState({
@@ -69,6 +68,34 @@ class Properties extends Component {
       )
     );
 
+    let singleProperty = this.props.properties.properties[
+      this.state.selectedProperty
+    ] ? (
+      <div>
+        <h1>
+          {
+            this.props.properties.properties[this.state.selectedProperty]
+              .address1
+          }
+        </h1>
+
+        {Object.keys(
+          this.props.properties.properties[this.state.selectedProperty].units
+        ).map((key, unit) => (
+          <div>
+            <p>
+              {
+                this.props.properties.properties[this.state.selectedProperty]
+                  .units[key].rent
+              }
+            </p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      ""
+    );
+
     return (
       <div className="properties">
         <div className="heading-row">
@@ -87,7 +114,9 @@ class Properties extends Component {
             </p>
             <div className="properties-list">{properties}</div>
           </div>
-          <div className="placeholder-container" />
+          <div className="placeholder-container single-property-container">
+            {singleProperty}
+          </div>
         </div>
       </div>
     );
