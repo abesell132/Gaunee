@@ -15,10 +15,9 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  isTenant: {
-    type: Boolean,
-    default: false,
-    required: true
+  role: {
+    type: String,
+    requird: true
   },
   tenantID: {
     type: Schema.Types.ObjectId,
