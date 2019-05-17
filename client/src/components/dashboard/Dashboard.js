@@ -27,7 +27,6 @@ class Dashboard extends Component {
     this.props.getProperties();
   }
   UNSAFE_componentWillReceiveProps() {
-    this.props.updateActivePage("Dashboard");
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }

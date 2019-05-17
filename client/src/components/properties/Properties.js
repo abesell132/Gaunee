@@ -16,15 +16,18 @@ class Properties extends Component {
 
     this.onPropertyClick = this.onPropertyClick.bind(this);
   }
+
   UNSAFE_componentWillMount() {
     this.props.updateActivePage("Properties");
   }
-
+  componentDidMount() {
+    this.props.updateActivePage("Properties");
+  }
   componentWillUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.props.properties.properties[0]) {
         this.setState({
-          selectedProperty: this.props.properties.properties[0]._id
+          selectedProperty: 0
         });
       }
     }
@@ -32,9 +35,7 @@ class Properties extends Component {
 
   isSelected(property) {
     let selectedProperty = this.state.selectedProperty;
-    let propertyInQuestion = this.props.properties.properties[property]._id;
-
-    if (selectedProperty === propertyInQuestion) {
+    if (parseInt(selectedProperty) === property) {
       return true;
     } else {
       return false;
@@ -42,7 +43,6 @@ class Properties extends Component {
   }
   onPropertyClick(e) {
     e.preventDefault();
-    console.log(e.currentTarget.getAttribute("name"));
     this.setState({
       selectedProperty: e.currentTarget.getAttribute("name")
     });
@@ -56,7 +56,7 @@ class Properties extends Component {
             "is-selected": this.isSelected(property)
           })}
           key={key}
-          name={this.props.properties.properties[key]._id}
+          name={key}
           onClick={this.onPropertyClick}
         >
           <h3>{this.props.properties.properties[key].address1}</h3>
