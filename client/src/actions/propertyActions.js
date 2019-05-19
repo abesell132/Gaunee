@@ -18,3 +18,12 @@ export const addProperty = apartmentData => dispatch => {
     })
     .catch(err => console.log(err));
 };
+
+export const deleteProperty = propertyID => dispatch => {
+  axios
+    .post("/api/apartments/delete", propertyID)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err));
+};

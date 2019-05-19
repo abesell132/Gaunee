@@ -59,8 +59,8 @@ class Sidebar extends Component {
     }
     let properties = Object.values(this.props.properties.properties).map(
       property => (
-        <div className="property-container">
-          <p key={property.address1}>{property.address1}</p>
+        <div className="property-container" key={property._id}>
+          <p key={property.name}>{property.name}</p>
         </div>
       )
     );

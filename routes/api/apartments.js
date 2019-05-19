@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { ObjectId } = require("mongodb");
 
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -30,9 +31,16 @@ router.post(
       // YES: return ID of tenant, store in unit
       // NO: create Tenant, store ID In Unit
     }
+    let apartmentName;
+    if (!req.body.name) {
+      apartmentName = req.body.address1;
+    } else {
+      apartmentName = req.body.name;
+    }
 
     const newApartment = new Apartment({
       owner: req.user.id,
+      name: apartmentName,
       address1: req.body.address1,
       address2: req.body.address2,
       city: req.body.city,
@@ -67,6 +75,25 @@ router.get(
       .catch(err => {
         res.send(err);
       });
+  }
+);
+
+// @route   POST api/apartments/create
+// @desc    Creates Apartment
+// @access  Private
+router.post(
+  "/delete",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let apartmentID = req.body.id;
+    console.log(apartmentID);
+    Apartment.deleteOne({ _id: ObjectId(apartmentID) }, err => {
+      if (!err) {
+        res.send("Success");
+      } else {
+        res.json(err);
+      }
+    });
   }
 );
 

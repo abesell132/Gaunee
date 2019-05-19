@@ -204,6 +204,7 @@ class AddProperty extends Component {
       },
       () => {
         const propertyData = {
+          name: this.state.name,
           address1: this.state.address1,
           address2: this.state.address2,
           city: this.state.city,
@@ -222,7 +223,6 @@ class AddProperty extends Component {
           },
           () => {
             this.props.addProperty(propertyData);
-            this.props.getProperties();
             this.props.getProperties();
             this.props.getProperties();
           }
@@ -394,6 +394,13 @@ class AddProperty extends Component {
                 </i>
               </p>
               <form onSubmit={this.onSubmit}>
+                <TextFieldGroup
+                  placeholder="Property Name"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.onChange}
+                  info="Optional. If left empty, the address will be used as the property name."
+                />
                 <TextFieldGroup
                   placeholder="Address Line 1"
                   name="address1"
