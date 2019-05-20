@@ -17,7 +17,6 @@ import "./components/quick-facts/quickfacts.css";
 class DashboardLanding extends Component {
   componentDidMount() {
     this.props.updateActivePage("Dashboard");
-    console.log(this.props);
   }
   render() {
     return (

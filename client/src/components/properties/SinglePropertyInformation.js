@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProperty, getProperties } from "../../actions/propertyActions";
+import { updateActiveProperty } from "../../actions/siteMetaActions";
 
 class SinglePropertyInformation extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedProperty: ""
-    };
     this.deleteProperty = this.deleteProperty.bind(this);
   }
 
@@ -20,53 +18,42 @@ class SinglePropertyInformation extends Component {
     };
     console.log(propertyID);
     this.props.deleteProperty(propertyID);
+    this.props.updateActiveProperty(0);
     this.props.getProperties();
     this.props.getProperties();
     this.props.getProperties();
-  }
-
-  componentDidMount() {
-    this.setState({
-      selectedProperty: this.props.selectedProperty
-    });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.selectedProperty !== this.props.selectedProperty) {
-      this.setState({ selectedProperty: this.props.selectedProperty });
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.selectedProperty !== prevState.selectedProperty) {
-      return { selectedProperty: nextProps.selectedProperty };
-    } else return null;
   }
 
   render() {
     let properties = this.props.properties.properties;
+    let selectedProperty = this.props.siteMeta.activeProperty;
+    let propertyName, propertyAddress1, city, state, zipcode, numOfUnits;
+    let numOfCurrentTenants = 0;
 
-    let propertyName = properties[this.state.selectedProperty]
-      ? properties[this.state.selectedProperty].name
-      : "";
-    let propertyUnits = properties[this.state.selectedProperty]
-      ? Object.keys(properties[this.state.selectedProperty].units).map(
-          (key, unit) => (
-            <div>
-              <p>{properties[this.state.selectedProperty].units[key].rent}</p>
-            </div>
-          )
-        )
-      : "";
+    if (properties[selectedProperty]) {
+      propertyName = properties[selectedProperty].name;
+      propertyAddress1 = properties[selectedProperty].address1;
+      city = properties[selectedProperty].city;
+      state = properties[selectedProperty].state;
+      zipcode = properties[selectedProperty].zipcode;
+      numOfUnits = properties[selectedProperty].units.length;
 
-    let singleProperty = properties[this.state.selectedProperty] ? (
+      const units = Object.values(properties[selectedProperty].units);
+      for (let unit of units) {
+        let tenants = unit.tenants;
+        console.log(tenants.length);
+        numOfCurrentTenants += tenants.length;
+      }
+    }
+
+    return (
       <div>
         <p className="section-title">
-          {propertyName}{" "}
+          {propertyName}
           <button
             className="btn delete-property-button"
             onClick={this.deleteProperty}
-            name={this.state.selectedProperty}
+            name={selectedProperty}
           >
             Delete
           </button>
@@ -75,15 +62,26 @@ class SinglePropertyInformation extends Component {
           </Link>
         </p>
         <div className="padding-20">
-          <h1>{properties[this.state.selectedProperty].address1}</h1>
-          {propertyUnits}
+          <div className="property-header">
+            <div className="property-address-container">
+              <h5 className="propertyAddress">{propertyAddress1}</h5>
+              <h5 className="propertyAddress">
+                {city}, {state} {zipcode}
+              </h5>
+            </div>
+            <div className="numOfUnits-container">
+              <h5 className="numOfUnits no-margin">
+                {numOfUnits} Mangaged Unit{numOfUnits - 1 ? "s" : ""}
+              </h5>
+              <h5 className="numOfUnits no-margin">
+                {numOfCurrentTenants} Active Tenant
+                {numOfCurrentTenants - 1 ? "s" : ""}
+              </h5>
+            </div>
+          </div>
         </div>
       </div>
-    ) : (
-      ""
     );
-
-    return <div>{singleProperty}</div>;
   }
 }
 
@@ -96,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteProperty, getProperties }
+  { deleteProperty, getProperties, updateActiveProperty }
 )(SinglePropertyInformation);

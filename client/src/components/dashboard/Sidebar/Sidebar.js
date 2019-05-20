@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProperties } from "../../../actions/propertyActions";
+import { updateActiveProperty } from "../../../actions/siteMetaActions";
+
 import("./sidebar.css");
 
 class Sidebar extends Component {
@@ -18,8 +20,21 @@ class Sidebar extends Component {
 
     this.onClick = this.onClick.bind(this);
     this.toggleSearchInput = this.toggleSearchInput.bind(this);
+    this.updateSiteMetaProperty = this.updateSiteMetaProperty.bind(this);
   }
 
+  updateSiteMetaProperty(e) {
+    const keys = Object.values(this.props.properties.properties);
+    let iterations = 0;
+    for (const key of keys) {
+      if (key._id === e.currentTarget.name) {
+        this.props.updateActiveProperty(iterations);
+      } else {
+      }
+      iterations++;
+    }
+    // this.props.updateActiveProperty();
+  }
   componentWillReceiveProps(nextProps) {
     this.setState({
       activeItem: nextProps.siteMeta.activePage
@@ -60,7 +75,13 @@ class Sidebar extends Component {
     let properties = Object.values(this.props.properties.properties).map(
       property => (
         <div className="property-container" key={property._id}>
-          <p key={property.name}>{property.name}</p>
+          <Link
+            to="/dashboard/properties"
+            onClick={this.updateSiteMetaProperty}
+            name={property._id}
+          >
+            <p key={property.name}>{property.name}</p>
+          </Link>
         </div>
       )
     );
@@ -208,5 +229,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProperties }
+  { getProperties, updateActiveProperty }
 )(Sidebar);

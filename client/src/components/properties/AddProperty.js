@@ -5,7 +5,12 @@ import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import update from "react-addons-update";
-import { addProperty, getProperties } from "../../actions/propertyActions";
+import {
+  addProperty,
+  getProperties,
+  clearErrors
+} from "../../actions/propertyActions";
+import { updateActivePage } from "../../actions/siteMetaActions";
 import { states } from "./states";
 
 import "./add-property.css";
@@ -18,6 +23,7 @@ class AddProperty extends Component {
       address2: "",
       city: "",
       state: "",
+      name: "",
       zipcode: "",
       units: [],
       errors: {}
@@ -32,6 +38,9 @@ class AddProperty extends Component {
     this.deleteTenant = this.deleteTenant.bind(this);
 
     // this.onKeyDown = this.onKeyDown.bind(this);
+  }
+  componentDidMount() {
+    this.props.updateActivePage("Properties");
   }
 
   componentWillReceiveProps(nextProps) {
@@ -192,45 +201,51 @@ class AddProperty extends Component {
     });
   }
 
+  isEmpty(obj) {
+    return Object.getOwnPropertyNames(obj).length === 0;
+  }
   onChange(e) {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
-    this.setState(
-      {
-        errors: {}
-      },
-      () => {
-        const propertyData = {
-          name: this.state.name,
-          address1: this.state.address1,
-          address2: this.state.address2,
-          city: this.state.city,
-          state: this.state.state,
-          zipcode: this.state.zipcode,
-          units: this.state.units
-        };
-        this.setState(
-          {
-            address1: "",
-            address2: "",
-            city: "",
-            state: "",
-            zipcode: "",
-            units: []
-          },
-          () => {
-            this.props.addProperty(propertyData);
-            this.props.getProperties();
-            this.props.getProperties();
-          }
-        );
-      }
-    );
-
     e.preventDefault();
+    this.props.clearErrors();
+    const propertyData = {
+      name: this.state.name,
+      address1: this.state.address1,
+      address2: this.state.address2,
+      city: this.state.city,
+      state: this.state.state,
+      zipcode: this.state.zipcode,
+      units: this.state.units
+    };
+
+    this.props.addProperty(propertyData);
+    setTimeout(() => {
+      this.setState(
+        {
+          errors: this.props.errors
+        },
+        () => {
+          if (this.isEmpty(this.state.errors)) {
+            this.setState({
+              name: "",
+              address1: "",
+              address2: "",
+              city: "",
+              state: "",
+              zipcode: "",
+              units: []
+            });
+          }
+        }
+      );
+    }, 100);
+
+    this.props.getProperties();
+    this.props.getProperties();
   }
 
   render() {
@@ -379,7 +394,7 @@ class AddProperty extends Component {
         </div>
       </div>
     ));
-    const { errors } = this.state;
+    const errors = this.state.errors;
 
     return (
       <div className="add-property">
@@ -406,13 +421,18 @@ class AddProperty extends Component {
                   name="address1"
                   value={this.state.address1}
                   onChange={this.onChange}
+                  error={errors.address}
                 />
+                {errors.address && (
+                  <div className="invalid-feedback">{errors.address}</div>
+                )}
                 <TextFieldGroup
                   placeholder="Address Line 2"
                   name="address2"
                   value={this.state.address2}
                   onChange={this.onChange}
                 />
+
                 <div className="row">
                   <div className="col-sm-4">
                     <TextFieldGroup
@@ -420,7 +440,11 @@ class AddProperty extends Component {
                       name="city"
                       value={this.state.city}
                       onChange={this.onChange}
+                      error={errors.city}
                     />
+                    {errors.city && (
+                      <div className="invalid-feedback">{errors.city}</div>
+                    )}
                   </div>
                   <div className="col-sm-4">
                     <SelectListGroup
@@ -428,8 +452,11 @@ class AddProperty extends Component {
                       value={this.state.state}
                       onChange={this.onChange}
                       options={states}
-                      error={errors.status}
+                      error={errors.state}
                     />
+                    {errors.state && (
+                      <div className="invalid-feedback">{errors.state}</div>
+                    )}
                   </div>
                   <div className="col-sm-4">
                     <TextFieldGroup
@@ -437,7 +464,11 @@ class AddProperty extends Component {
                       name="zipcode"
                       value={this.state.zipcode}
                       onChange={this.onChange}
+                      error={errors.zipcode}
                     />
+                    {errors.zipcode && (
+                      <div className="invalid-feedback">{errors.zipcode}</div>
+                    )}
                   </div>
                 </div>
                 <div className="repeater-inputs">{properties}</div>
@@ -479,5 +510,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addProperty, getProperties }
+  { addProperty, getProperties, clearErrors, updateActivePage }
 )(withRouter(AddProperty));

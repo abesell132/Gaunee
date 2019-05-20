@@ -1,7 +1,8 @@
-import { UPDATE_ACTIVE_PAGE } from "../actions/types";
+import { UPDATE_ACTIVE_PAGE, UPDATE_ACTIVE_PROPERTY } from "../actions/types";
 
 const initialState = {
-  activePage: {}
+  activePage: {},
+  activeProperty: "0"
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +12,11 @@ export default function(state = initialState, action) {
         ...state,
         activePage: action.payload
       };
-
+    case UPDATE_ACTIVE_PROPERTY:
+      return {
+        ...state,
+        activeProperty: action.payload
+      };
     default:
       return state;
   }

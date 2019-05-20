@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PROPERTIES } from "./types";
+import { GET_PROPERTIES, GET_ERRORS, CLEAR_ERRORS } from "./types";
 
 export const getProperties = () => dispatch => {
   axios
@@ -16,7 +16,12 @@ export const addProperty = apartmentData => dispatch => {
     .then(res => {
       console.log(res);
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 export const deleteProperty = propertyID => dispatch => {
@@ -26,4 +31,8 @@ export const deleteProperty = propertyID => dispatch => {
       console.log(res);
     })
     .catch(err => console.log(err));
+};
+
+export const clearErrors = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
 };

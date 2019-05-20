@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class Addons extends Component {
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.props.updateActivePage("Addons");
   }
   render() {

@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import { updateActivePage } from "../../actions/siteMetaActions";
+import {
+  updateActivePage,
+  updateActiveProperty
+} from "../../actions/siteMetaActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SinglePropertyInformation from "./SinglePropertyInformation";
+import missingApartment from "../../img/missing-apartment.png";
 
 import "./properties.css";
 
@@ -22,17 +26,17 @@ class Properties extends Component {
     this.props.updateActivePage("Properties");
   }
   componentWillUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
-      if (this.props.properties.properties[0]) {
-        this.setState({
-          selectedProperty: 0
-        });
-      }
-    }
+    // if (prevProps !== this.props) {
+    //   if (this.props.properties.properties[0]) {
+    //     this.setState({
+    //       selectedProperty: 0
+    //     });
+    //   }
+    // }
   }
 
   isSelected(property) {
-    let selectedProperty = this.state.selectedProperty;
+    let selectedProperty = this.props.siteMeta.activeProperty;
     if (parseInt(selectedProperty) === property) {
       return true;
     } else {
@@ -42,12 +46,12 @@ class Properties extends Component {
 
   onPropertyClick(e) {
     e.preventDefault();
-    this.setState({
-      selectedProperty: e.currentTarget.getAttribute("name")
-    });
+    this.props.updateActiveProperty(e.currentTarget.getAttribute("name"));
   }
 
   render() {
+    let propertiesContent;
+
     let properties = Object.keys(this.props.properties.properties).map(
       (key, property) => (
         <div
@@ -68,14 +72,8 @@ class Properties extends Component {
       )
     );
 
-    return (
-      <div className="properties">
-        <div className="heading-row">
-          <h1>
-            <Link to="/dashboard">Dashboard</Link> <small>></small>{" "}
-            <strong>Properties</strong>
-          </h1>
-        </div>
+    if (this.props.properties.properties[0]) {
+      propertiesContent = (
         <div className="dashboard-content">
           <div className="placeholder-container">
             <p className="section-title">
@@ -92,6 +90,43 @@ class Properties extends Component {
             />
           </div>
         </div>
+      );
+    } else {
+      propertiesContent = (
+        <div className="dashboard-content">
+          <div className="no-apartment-container">
+            <div>
+              <img
+                src={missingApartment}
+                className="mw-200"
+                alt="No Properties Decoration"
+              />
+              <p className="fs-18">
+                Looks like you haven't added a property yet!
+              </p>
+              <Link to="/dashboard/properties/add">
+                <button
+                  className="btn add-property-button"
+                  style={{ float: "none", fontSize: "18px" }}
+                >
+                  Add Apartment
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="properties">
+        <div className="heading-row">
+          <h1>
+            <Link to="/dashboard">Dashboard</Link> <small>></small>{" "}
+            <strong>Properties</strong>
+          </h1>
+        </div>
+        {propertiesContent}
       </div>
     );
   }
@@ -110,5 +145,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateActivePage }
+  { updateActivePage, updateActiveProperty }
 )(Properties);

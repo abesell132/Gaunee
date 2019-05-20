@@ -21,6 +21,12 @@ router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateApartmentInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     //Remove $ sign from Rent Submission
     let units = req.body.units;
     for (let i = 0; i < units.length; i++) {

@@ -1,7 +1,19 @@
 .padding-20 {
   padding: 20px;
 }
-
+.mw-200 {
+  max-width: 200px;
+}
+.no-apartment-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.fs-18 {
+  font-size: 18px;
+}
 .properties .placeholder-container {
   background: white;
   height: 100%;
@@ -29,7 +41,7 @@
   border-bottom: 1px solid #dedede;
 }
 
-.properties .placeholder-container p .add-property-button {
+.properties .add-property-button {
   float: right;
   background: #2ecc71;
   vertical-align: top;
@@ -80,4 +92,26 @@
 }
 .single-property h3 {
   margin-bottom: 0;
+}
+
+.propertyAddress {
+  margin: 0;
+}
+
+.numOfUnits {
+  margin: 0 0 0;
+  font-weight: 300;
+}
+
+.property-header {
+  display: flex;
+}
+
+.property-address-container {
+  width: 70%;
+}
+
+.numOfUnits-container {
+  width: 30%;
+  text-align: right;
 }
