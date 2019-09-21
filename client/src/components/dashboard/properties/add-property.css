@@ -124,3 +124,15 @@
   transform: translate(0) !important;
   overflow-y: auto;
 }
+
+.single-unit-form button[type="submit"] {
+  background: #2fcc71;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 4px;
+  color: white;
+}
+.single-unit-form button[type="submit"]:hover {
+  background: #169c4e;
+}

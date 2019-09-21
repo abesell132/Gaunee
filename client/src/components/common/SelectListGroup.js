@@ -18,7 +18,7 @@ function SelectListGroup({ name, placeholder, className, onSelect, options }) {
     <div className="form-group">
       <DropdownButton
         className={"dropdown-basic-button " + className}
-        title={placeholder}
+        title={name}
       >
         {selectOptions}
       </DropdownButton>

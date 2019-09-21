@@ -13,6 +13,7 @@ import DashboardLanding from "./Dashboard/DashboardLanding";
 
 import { updateActivePage } from "../../redux/actions/siteMetaActions";
 import { getCurrentProfile } from "../../redux/actions/profileActions";
+import { getAllProperties } from "../../redux/actions/propertyActions";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
@@ -23,6 +24,7 @@ class Dashboard extends Component {
   }
   UNSAFE_componentWillMount() {
     this.props.getCurrentProfile();
+    this.props.getAllProperties();
   }
   UNSAFE_componentWillReceiveProps() {
     if (!this.props.auth.isAuthenticated) {
@@ -89,5 +91,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, updateActivePage }
+  { getCurrentProfile, updateActivePage, getAllProperties }
 )(Dashboard);

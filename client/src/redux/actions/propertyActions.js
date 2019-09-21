@@ -1,18 +1,29 @@
 import axios from "axios";
-import { GET_ERRORS, CLEAR_ERRORS } from "./types";
+import { CLEAR_ERRORS, GET_PROPERTIES } from "./types";
 
-export const addProperty = apartmentData => dispatch => {
+export const getAllProperties = () => dispatch => {
   axios
-    .post("/api/properties/create", apartmentData)
+    .get("/api/properties/all")
     .then(res => {
       console.log(res);
-    })
-    .catch(err =>
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+        type: GET_PROPERTIES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const addProperty = propertyData => dispatch => {
+  axios
+    .post("/api/properties/create", propertyData)
+    .then(res => {
+      console.log(res);
+      dispatch(getAllProperties());
+    })
+    .catch(err => console.log(err));
 };
 
 export const deleteProperty = propertyID => dispatch => {

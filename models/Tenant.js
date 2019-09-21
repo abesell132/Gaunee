@@ -11,7 +11,11 @@ const TenantSchema = new Schema({
     type: String,
     requird: true
   },
-  phone: {
+  homePhone: {
+    type: String,
+    requird: false
+  },
+  workPhone: {
     type: String,
     requird: false
   },
@@ -19,14 +23,10 @@ const TenantSchema = new Schema({
     type: String,
     required: false
   },
-  property: {
+  userID: {
     type: Schema.Types.ObjectId,
-    ref: "apartments"
-  },
-  unit: {
-    type: Schema.Types.ObjectId,
-    ref: "apartments"
+    ref: "users"
   }
 });
 
-module.exports = Tenant = mongoose.model("tenant", TenantSchema);
+module.exports = Tenant = mongoose.model("tenants", TenantSchema);

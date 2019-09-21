@@ -29,7 +29,7 @@ class MainNavIcon extends Component {
       });
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.activeItem === this.state.name) {
       this.setState({
         isActive: true,

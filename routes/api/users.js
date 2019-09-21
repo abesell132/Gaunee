@@ -4,13 +4,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
-
+const mongoose = require("mongoose");
 // Load Input Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
+const Profile = require("../../models/Profile");
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -29,12 +30,12 @@ router.post("/register", (req, res) => {
   }
 
   User.findOne({ email: req.body.email }).then(user => {
+    console.log(user);
     if (user) {
       errors.email = "Email already exists";
       return res.status(400).json(errors);
     } else {
       const newUser = new User({
-        name: req.body.name,
         email: req.body.email,
         password: req.body.password
       });
@@ -45,7 +46,16 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
+            .then(user => {
+              const newProfile = new Profile({
+                firstName: req.body.name,
+                user: mongoose.Types.ObjectId(user._id)
+              });
+              newProfile
+                .save()
+                .then(profile => res.json({ user, profile }))
+                .catch(err => console.log(err));
+            })
             .catch(err => console.log(err));
         });
       });

@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true
@@ -18,10 +14,6 @@ const UserSchema = new Schema({
   role: {
     type: String,
     requird: true
-  },
-  tenantID: {
-    type: Schema.Types.ObjectId,
-    ref: "tenants"
   },
   date: {
     type: Date,

@@ -5,13 +5,11 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-const Apartment = require("../../models/Apartment");
+const Building = require("../../models/Building");
 
-const validateApartmentInput = require("../../validation/createApartment");
-
-// @route   GET api/apartments/test
+// @route   GET api/buildings/test
 // @desc    Tests post route
 // @access  Public
-router.get("/test", (req, res) => res.json({ msg: "Apartments Works" }));
+router.get("/test", (req, res) => res.json({ msg: "Buildings Works" }));
 
 module.exports = router;

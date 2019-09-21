@@ -2,73 +2,28 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ApartmentSchema = new Schema({
-  owner: {
+  propertyID: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "properties",
+    required: true
   },
-  manager: {
+  buildingID: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "buildings",
+    required: false
   },
-  name: {
+  availability: {
     type: String,
     required: false
   },
-  address1: {
-    type: String,
-    required: true
-  },
-  address2: {
+  monthlyRent: {
     type: String,
     required: false
   },
-  city: {
-    type: String,
-    required: true
-  },
-  state: {
-    type: String,
-    required: true
-  },
-  zipcode: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    default: "United States"
-  },
-  units: [
+  tenants: [
     {
-      rent: {
-        type: Number,
-        required: true
-      },
-      baths: {
-        type: Number
-      },
-      beds: {
-        type: Number
-      },
-      squareFeet: {
-        type: Number
-      },
-      tenants: [
-        {
-          firstName: {
-            type: String
-          },
-          lastName: {
-            type: String
-          },
-          email: {
-            type: String
-          },
-          phone: {
-            type: String
-          }
-        }
-      ]
+      type: Schema.Types.ObjectId,
+      ref: "tenants"
     }
   ]
 });

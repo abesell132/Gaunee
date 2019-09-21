@@ -28,6 +28,7 @@ class AddProperty extends Component {
     };
 
     this.toggleSingleUnitModal = this.toggleSingleUnitModal.bind(this);
+    this.onSingleUnitFormSubmit = this.onSingleUnitFormSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -45,9 +46,14 @@ class AddProperty extends Component {
       showSingleUnitModal: true
     });
   }
+  onSingleUnitFormSubmit() {
+    this.setState({
+      showSingleUnitModal: false
+    });
+  }
 
   render() {
-    var singleUnit = <SingleUnitForm />;
+    var singleUnit = <SingleUnitForm onSubmit={this.onSingleUnitFormSubmit} />;
     return (
       <div className="add-property">
         <ModalPopup
@@ -55,6 +61,7 @@ class AddProperty extends Component {
           dialogClassName="single-unit-modal"
           showModal={this.state.showSingleUnitModal}
           title="Single Unit"
+          toggleSingleUnitModal
           onHide={this.toggleSingleUnitModal}
           showFooter={false}
           bodyContent={singleUnit}

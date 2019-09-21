@@ -42,7 +42,7 @@ class Sidebar extends Component {
     }
     // this.props.updateActiveProperty();
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       activeItem: nextProps.siteMeta.activePage
     });
