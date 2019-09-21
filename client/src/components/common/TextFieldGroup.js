@@ -20,7 +20,7 @@ function TextFieldGroup({
       <span className="input-label">{label}</span>
       <input
         type={type}
-        className={classnames(" form-control form-control-lg", {
+        className={classnames("form-control form-control-lg", {
           "is-invalid": error
         })}
         placeholder={placeholder}

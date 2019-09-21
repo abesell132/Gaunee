@@ -6,14 +6,13 @@ import Sidebar from "./Sidebar/Sidebar";
 import Messages from "./Messages/Messages";
 import Settings from "./Settings/Settings";
 import Finances from "./Finances/Finances";
-import Properties from "../properties/Properties";
+import Properties from "./properties/Properties";
 import Addons from "./Addons/Addons";
-import AddProperty from "../properties/AddProperty";
+import AddProperty from "./properties/AddProperty";
 import DashboardLanding from "./Dashboard/DashboardLanding";
 
-import { updateActivePage } from "../../actions/siteMetaActions";
-import { getProperties } from "../../actions/propertyActions";
-import { getCurrentProfile } from "../../actions/profileActions";
+import { updateActivePage } from "../../redux/actions/siteMetaActions";
+import { getCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
@@ -24,7 +23,6 @@ class Dashboard extends Component {
   }
   UNSAFE_componentWillMount() {
     this.props.getCurrentProfile();
-    this.props.getProperties();
   }
   UNSAFE_componentWillReceiveProps() {
     if (!this.props.auth.isAuthenticated) {
@@ -77,7 +75,6 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  getProperties: PropTypes.func.isRequired,
   updateActivePage: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
@@ -92,5 +89,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, getProperties, updateActivePage }
+  { getCurrentProfile, updateActivePage }
 )(Dashboard);

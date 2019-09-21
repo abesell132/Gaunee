@@ -4,11 +4,11 @@ import classnames from "classnames";
 import {
   updateActivePage,
   updateActiveProperty
-} from "../../actions/siteMetaActions";
+} from "../../../redux/actions/siteMetaActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SinglePropertyInformation from "./SinglePropertyInformation";
-import missingApartment from "../../img/missing-apartment.png";
+import missingApartment from "../../../img/missing-apartment.png";
 
 import "./properties.css";
 
@@ -101,15 +101,13 @@ class Properties extends Component {
                 className="mw-200"
                 alt="No Properties Decoration"
               />
-              <p className="fs-18">
-                Looks like you haven't added a property yet!
-              </p>
+              <p className="fs-18">Looks like you don't have any properties!</p>
               <Link to="/dashboard/properties/add">
                 <button
                   className="btn add-property-button"
                   style={{ float: "none", fontSize: "18px" }}
                 >
-                  Add Apartment
+                  Add Property
                 </button>
               </Link>
             </div>

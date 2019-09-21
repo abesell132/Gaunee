@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteProperty, getProperties } from "../../actions/propertyActions";
-import { updateActiveProperty } from "../../actions/siteMetaActions";
+import { deleteProperty } from "../../..//redux/actions/propertyActions";
+import { updateActiveProperty } from "../../../redux/actions/siteMetaActions";
 
 class SinglePropertyInformation extends Component {
   constructor(props) {
@@ -19,9 +19,6 @@ class SinglePropertyInformation extends Component {
     console.log(propertyID);
     this.props.deleteProperty(propertyID);
     this.props.updateActiveProperty(0);
-    this.props.getProperties();
-    this.props.getProperties();
-    this.props.getProperties();
   }
 
   render() {
@@ -94,5 +91,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteProperty, getProperties, updateActiveProperty }
+  { deleteProperty, updateActiveProperty }
 )(SinglePropertyInformation);

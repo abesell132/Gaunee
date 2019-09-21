@@ -4,8 +4,8 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProperties } from "../../../actions/propertyActions";
-import { updateActiveProperty } from "../../../actions/siteMetaActions";
+import { updateActiveProperty } from "../../../redux/actions/siteMetaActions";
+import DropdownNotification from "./dropdown/DropdownNotification.js";
 
 import("./sidebar.css");
 
@@ -14,6 +14,7 @@ class Sidebar extends Component {
     super(props);
     this.state = {
       activeItem: "Dashboard",
+      notificationsOpen: false,
       currentNotifs: 1,
       searchProperties: false
     };
@@ -21,6 +22,12 @@ class Sidebar extends Component {
     this.onClick = this.onClick.bind(this);
     this.toggleSearchInput = this.toggleSearchInput.bind(this);
     this.updateSiteMetaProperty = this.updateSiteMetaProperty.bind(this);
+    this.toggleNotifications = this.toggleNotifications.bind(this);
+    this.closeNotificationDropdown = this.closeNotificationDropdown.bind(this);
+  }
+
+  preventProp(e) {
+    e.stopPropagation();
   }
 
   updateSiteMetaProperty(e) {
@@ -41,11 +48,26 @@ class Sidebar extends Component {
     });
   }
 
-  UNSAFE_componentWillMount() {
-    this.props.getProperties();
+  UNSAFE_componentWillMount() {}
+
+  toggleNotifications() {
+    if (this.state.notificationsOpen) {
+      this.closeNotificationDropdown();
+      return;
+    }
+    this.setState({
+      notificationsOpen: true
+    });
+  }
+
+  closeNotificationDropdown() {
+    this.setState({
+      notificationsOpen: false
+    });
   }
 
   onClick(e) {
+    this.closeNotificationDropdown();
     this.setState({
       activeItem: e.target.id
     });
@@ -72,6 +94,7 @@ class Sidebar extends Component {
     } else {
       hasNotifs = false;
     }
+
     let properties = Object.values(this.props.properties.properties).map(
       property => (
         <div className="property-container" key={property._id}>
@@ -155,7 +178,10 @@ class Sidebar extends Component {
           <div className="notifications-container">
             <div>
               <span>Notifications</span>
-              <div className="notif-icon-container position-relative">
+              <div
+                className="notif-icon-container position-relative"
+                onClick={this.toggleNotifications}
+              >
                 <i className="fa fa-bell" />
 
                 <div
@@ -164,6 +190,28 @@ class Sidebar extends Component {
                   })}
                 >
                   {this.state.currentNotifs}
+                </div>
+                <div
+                  className={classnames("notif-dropdown", {
+                    "notif-dropdown-open": this.state.notificationsOpen
+                  })}
+                  onClick={this.preventProp}
+                >
+                  <div>
+                    <div className="dropdown-notifs-list">
+                      <DropdownNotification />
+                      <hr />
+                      <DropdownNotification />
+                    </div>
+                    <div className="dropdown-message-center-link">
+                      <Link
+                        to="/dashboard/messages"
+                        onClick={this.closeNotificationDropdown}
+                      >
+                        Go To Message Center
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -217,7 +265,6 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  getProperties: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   siteMeta: PropTypes.object.isRequired
 };
@@ -229,5 +276,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProperties, updateActiveProperty }
+  { updateActiveProperty }
 )(Sidebar);

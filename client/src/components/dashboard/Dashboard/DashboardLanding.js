@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { updateActivePage } from "../../../actions/siteMetaActions";
+import { updateActivePage } from "../../../redux/actions/siteMetaActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import FinanceChart from "./components/finances/FinancesChart";

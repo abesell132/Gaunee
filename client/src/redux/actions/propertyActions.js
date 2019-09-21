@@ -1,18 +1,9 @@
 import axios from "axios";
-import { GET_PROPERTIES, GET_ERRORS, CLEAR_ERRORS } from "./types";
-
-export const getProperties = () => dispatch => {
-  axios
-    .get("/api/apartments/all")
-    .then(res => dispatch({ type: GET_PROPERTIES, payload: res.data }))
-    .catch(err => {
-      console.log(err);
-    });
-};
+import { GET_ERRORS, CLEAR_ERRORS } from "./types";
 
 export const addProperty = apartmentData => dispatch => {
   axios
-    .post("/api/apartments/create", apartmentData)
+    .post("/api/properties/create", apartmentData)
     .then(res => {
       console.log(res);
     })
@@ -26,7 +17,7 @@ export const addProperty = apartmentData => dispatch => {
 
 export const deleteProperty = propertyID => dispatch => {
   axios
-    .post("/api/apartments/delete", propertyID)
+    .post("/api/properties/delete", propertyID)
     .then(res => {
       console.log(res);
     })

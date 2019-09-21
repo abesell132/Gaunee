@@ -1,0 +1,13 @@
+/* 
+* Modal Group
+*/
+
+.modal-header {
+  padding: 0.65rem 1rem !important;
+  align-items: center !important;
+}
+
+.modal-header .close {
+  padding: 0 !important;
+  margin: 0 !important;
+}

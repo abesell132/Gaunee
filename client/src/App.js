@@ -15,12 +15,10 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
 
 //Redux
-import store from "./store";
-import { setCurrentUser } from "./actions/authActions";
-import { logUserOut } from "./actions/authActions";
-import { clearCurrentProfile } from "./actions/profileActions";
-
-// import Footer from "./components/layout/Footer";
+import store from "./redux/store";
+import { setCurrentUser } from "./redux/actions/authActions";
+import { logUserOut } from "./redux/actions/authActions";
+import { clearCurrentProfile } from "./redux/actions/profileActions";
 
 //CSS
 import "./App.css";
