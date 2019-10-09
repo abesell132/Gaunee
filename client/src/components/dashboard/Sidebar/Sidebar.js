@@ -48,7 +48,7 @@ class Sidebar extends Component {
     });
   }
 
-  UNSAFE_componentWillMount() {}
+  UNSAFE_componentWillMount() { }
 
   toggleNotifications() {
     if (this.state.notificationsOpen) {
