@@ -9,7 +9,7 @@ class Header extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
-    this.props.logUserOut();
+    this.props.logUserOut(this.props.history);
   }
   render() {
     const { isAuthenticated } = this.props.auth;

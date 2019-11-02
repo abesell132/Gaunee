@@ -5,8 +5,6 @@ import "./sidebar.css";
 
 import MainNavItem from "../MainNavItem/MainNavItem.jsx";
 
-import logo from "assets/img/reactlogo.png";
-
 class Sidebar extends Component {
   constructor(props) {
     super(props);
