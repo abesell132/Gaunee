@@ -4,5 +4,29 @@
 }
 .properties-content {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  width: 80%;
+  margin: 0 auto;
+}
+
+.properties-content .dataTables_filter {
+  text-align: right;
+}
+
+.properties-content .property-archive-header {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.properties-content .property-archive-header * {
+  margin: 0 20px 0 0;
+}
+.properties-content .property-archive-header button {
+  background: white !important;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+.dataTables_wrapper > .row:last-of-type > div:last-of-type {
+  text-align: right;
 }

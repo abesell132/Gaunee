@@ -2,6 +2,7 @@
   max-width: 300px;
   display: flex;
   height: 100vh;
+  z-index: 2;
 }
 
 .main-nav,
@@ -170,22 +171,15 @@
 }
 
 .notifications-container i {
-  background: #696969;
-  border-radius: 4px;
-  display: inline;
-  padding: 8px;
+  margin: 0 5px;
 }
 .notifications-container i:hover {
-  background: #706f6f;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 8px;
-  transition: border-radius 4s;
+  color: #706f6f;
 }
 
 .notifications-container span,
 .notifications-container i {
-  vertical-align: bottom;
+  vertical-align: middle;
   color: white;
   font-size: 15px;
   line-height: 1;

@@ -37,7 +37,21 @@ h3,
 h4 {
   margin: 0;
 }
-
+.disabled {
+  pointer-events: none;
+}
+.d-flex {
+  display: flex;
+}
+.space-between {
+  justify-content: space-between;
+}
+.flex-vertical-center {
+  align-items: center;
+}
+a:hover {
+  cursor: pointer;
+}
 .all-icons [class*="pe-"] {
   font-size: 40px;
 }

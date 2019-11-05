@@ -1,0 +1,12 @@
+.dropdown-menu {
+  width: 300px;
+  min-height: 400px;
+  height: 400px;
+  max-height: 400px;
+}
+
+.dropdown-menu li {
+  padding: 8px 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}

@@ -168,22 +168,9 @@
   left: 35px;
 }
 
-.notifications-container i {
-  background: #696969;
-  border-radius: 4px;
-  padding: 8px;
-}
-.notifications-container i:hover {
-  background: #706f6f;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 8px;
-  transition: border-radius 4s;
-}
-
 .notifications-container span,
 .notifications-container i {
-  vertical-align: bottom;
+  vertical-align: middle;
   color: white;
   font-size: 15px;
   line-height: 1;

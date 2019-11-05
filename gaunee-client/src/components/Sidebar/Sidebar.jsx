@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import classnames from "classnames";
 import "./sidebar.css";
 
 import MainNavItem from "../MainNavItem/MainNavItem.jsx";
@@ -59,59 +58,19 @@ class Sidebar extends Component {
         </div>
         <div className="secondary-nav h-100">
           <div className="notifications-container">
-            <div>
-              <span>Notifications</span>
-              <div
-                className="notif-icon-container position-relative"
-                onClick={this.toggleNotifications}
-              >
-                <i className="fas fa-bell" />
-
-                <div className={"notifiation-number"}>
-                  {this.state.currentNotifs}
-                </div>
-                <div
-                  className={"notif-dropdown"}
-                  onClick={this.preventProp}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="side-bar-property-list">
-            <div className="property-controls">
+            <div className="d-flex space-between flex-vertical-center">
               <span>Properties</span>
-              <div className="icons">
+              <div>
                 <div className="property-icon">
                   <NavLink to="/dashboard/properties/add">
                     <i className="fas fa-plus" />
                   </NavLink>
-
-                  <div>
+                  <div style={{ zIndex: 2 }}>
                     <span>Add Property</span>
-                  </div>
-                </div>
-                <div className="property-icon">
-                  <i className="fas fa-tools" />
-                  <div>
-                    <span>Edit Properties</span>
-                  </div>
-                </div>
-                <div className="property-icon">
-                  <i
-                    className="fas fa-search"
-                    onClick={this.toggleSearchInput}
-                  />
-                  <div>
-                    <span>Search</span>
                   </div>
                 </div>
               </div>
             </div>
-            <input
-              className={classnames("sidebar-search-form", {
-                "search-properties": this.state.searchProperties
-              })}
-            />
           </div>
           <div className="sidebar-properties-list">{}</div>
           <div className="collapse-properties">

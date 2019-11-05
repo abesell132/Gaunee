@@ -48,7 +48,7 @@ class Sidebar extends Component {
     });
   }
 
-  UNSAFE_componentWillMount() { }
+  UNSAFE_componentWillMount() {}
 
   toggleNotifications() {
     if (this.state.notificationsOpen) {
@@ -175,47 +175,6 @@ class Sidebar extends Component {
           </div>
         </div>
         <div className="secondary-nav h-100">
-          <div className="notifications-container">
-            <div>
-              <span>Notifications</span>
-              <div
-                className="notif-icon-container position-relative"
-                onClick={this.toggleNotifications}
-              >
-                <i className="fa fa-bell" />
-
-                <div
-                  className={classnames("notifiation-number", {
-                    "has-notifs": hasNotifs
-                  })}
-                >
-                  {this.state.currentNotifs}
-                </div>
-                <div
-                  className={classnames("notif-dropdown", {
-                    "notif-dropdown-open": this.state.notificationsOpen
-                  })}
-                  onClick={this.preventProp}
-                >
-                  <div>
-                    <div className="dropdown-notifs-list">
-                      <DropdownNotification />
-                      <hr />
-                      <DropdownNotification />
-                    </div>
-                    <div className="dropdown-message-center-link">
-                      <Link
-                        to="/dashboard/messages"
-                        onClick={this.closeNotificationDropdown}
-                      >
-                        Go To Message Center
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="side-bar-property-list">
             <div className="property-controls">
               <span>Properties</span>
