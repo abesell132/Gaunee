@@ -26,7 +26,7 @@ class Sidebar extends Component {
     return (
       <div className="sidebar-container ">
         <div className="main-nav ">
-          {this.props.routes.map((prop, key) => {
+          {this.props.sidebarRoutes.map((prop, key) => {
             if (!prop.redirect)
               return (
                 <MainNavItem
@@ -62,7 +62,7 @@ class Sidebar extends Component {
               <span>Properties</span>
               <div>
                 <div className="property-icon">
-                  <NavLink to="/dashboard/properties/add">
+                  <NavLink to="/admin/properties/create">
                     <i className="fas fa-plus" />
                   </NavLink>
                   <div style={{ zIndex: 2 }}>

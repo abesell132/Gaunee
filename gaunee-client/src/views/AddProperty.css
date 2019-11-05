@@ -1,0 +1,142 @@
+.property-type-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.property-type-selector > div {
+  width: 100%;
+}
+.property-type-selector h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.add-property,
+.add-property .container,
+.add-property .container .row {
+  height: 100%;
+}
+.fw-300 {
+  font-weight: 300;
+}
+
+.property-types-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.property-types-container > div {
+  width: calc(380px - 20px);
+  height: calc(380px - 20px);
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px dashed #999;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.property-types-container > div:hover {
+  background: #eef2f3;
+  cursor: pointer;
+}
+
+.property-types-container img {
+  padding: 0 10%;
+  width: 100%;
+}
+
+.property-types-container h3 {
+  font-weight: 300;
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+/* 
+ * Forms
+ */
+.single-unit-modal .modal-body {
+  background: #eee;
+  border-radius: 0 0 4px 4px;
+}
+.single-unit-modal {
+  left: 150px;
+}
+.single-unit-modal form .flex {
+  display: flex;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 1rem;
+}
+
+.single-unit-modal form .flex-2 .form-group,
+.single-unit-modal form .flex-2 .spacer {
+  width: calc(50% - 10px);
+  margin: 0 10px;
+}
+.single-unit-modal form .flex-3 .form-group,
+.single-unit-modal form .flex-3 .spacer {
+  width: calc(33.3% - 10px);
+  margin: 0 10px;
+}
+.single-unit-form {
+  max-height: 50vh;
+  height: 50vh;
+  padding: 10px;
+  overflow-y: auto;
+}
+.single-unit-form .form-group input,
+.state-dropdown-list button {
+  background: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.state-dropdown-list button {
+  text-align: left;
+  color: #495057;
+  width: 100%;
+  text-align: left;
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-unit-form .form-group input:focus,
+.state-dropdown-list button:focus {
+  border: 1px solid #ced4da !important;
+  box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.1) !important;
+}
+
+.state-dropdown-list button:focus,
+.state-dropdown-list button:hover,
+.state-dropdown-list button:active,
+.state-dropdown-list.show > button {
+  background: #2dcb6f !important;
+  border-color: #2dcb6f !important;
+  color: white !important;
+}
+.single-unit-form .form-group small {
+  margin-left: 10px !important;
+}
+
+.single-unit-form .dropdown-menu {
+  max-height: 25vh;
+  transform: translate(0) !important;
+  overflow-y: auto;
+}
+
+.single-unit-form button[type="submit"] {
+  background: #2fcc71;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 4px;
+  color: white;
+}
+.single-unit-form button[type="submit"]:hover {
+  background: #169c4e;
+}

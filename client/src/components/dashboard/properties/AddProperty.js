@@ -92,7 +92,6 @@ class AddProperty extends Component {
 AddProperty.propTypes = {
   profile: PropTypes.object.isRequired,
   addProperty: PropTypes.func.isRequired,
-
   errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({

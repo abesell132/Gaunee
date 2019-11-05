@@ -116,8 +116,8 @@ class UserProfile extends Component {
                           <ControlLabel>About Me</ControlLabel>
                           <FormControl
                             rows="5"
-                            componentClass="textarea"
-                            bsClass="form-control"
+                            componentclassName="textarea"
+                            bsclassName="form-control"
                             placeholder="Here can be your description"
                             defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
                           />

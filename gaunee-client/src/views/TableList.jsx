@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MDBDataTable } from "mdbreact";
 import { Grid, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./TableList.css";
 
 class TableList extends Component {
@@ -354,9 +355,9 @@ class TableList extends Component {
     return (
       <div className="content properties-content">
         <div>
-          <div class="property-archive-header">
+          <div className="property-archive-header">
             <h3>Properties</h3>
-            <button>Add Property</button>
+            <Link to="/admin/properties/create">Add Property</Link>
           </div>
           <Grid>
             <Row>
