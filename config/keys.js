@@ -1,5 +1,4 @@
 module.exports = {
-  mongoURI:
-    "mongodb://abesell:sparkydevs1@ds121268.mlab.com:21268/boilerplateabesell",
-  secretOrKey: "secret"
+  mongoURI: "mongodb+srv://abesell:6TX38PNbZoG8zkAd@cluster0.a4arc.mongodb.net/boilerplateabesell?retryWrites=true&w=majority",
+  secretOrKey: "secret",
 };

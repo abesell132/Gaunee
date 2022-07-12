@@ -6,28 +6,28 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix gaunee-client",
+    "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Abe Sell",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.19.2",
     "chart.js": "^2.8.0",
     "concurrently": "^4.1.2",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.1",
-    "passport": "^0.4.0",
+    "mongoose": "^5.7.14",
+    "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "react-chartjs-2": "^2.7.6",
     "recharts": "^1.7.1",
     "validator": "^9.4.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.4"
   }
 }
