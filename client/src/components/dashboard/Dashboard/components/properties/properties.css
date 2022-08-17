@@ -5,10 +5,17 @@
   margin: 0;
   padding: 12.5px 20px;
   border-bottom: 1px solid #dedede;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .properties-box .change-later p a {
   color: #777;
+}
+
+.properties-box .change-later p span {
+  font-size: 14px;
 }
 .properties-box:first-of-type {
   height: calc(50% - 10px);
@@ -37,4 +44,38 @@
 .properties-box {
   box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+}
+
+.properties-box .properties-list a {
+  border-bottom: 2px solid #e6f1eb;
+  display: block;
+  background: #fff;
+  padding: 10px 20px;
+  text-transform: capitalize;
+}
+.properties-box .properties-list a img {
+  width: 40px;
+  height: auto;
+}
+.properties-box .properties-list a .content {
+  display: flex;
+  align-items: center;
+}
+
+.properties-box .properties-list a:hover {
+  background: #fcfcfd;
+  cursor: pointer;
+}
+
+.properties-box .properties-list a .content > div {
+  margin-left: 15px;
+}
+
+.properties-box .properties-list a div {
+  line-height: 1;
+}
+
+.properties-box .properties-list a .line1 {
+  font-weight: 600;
+  color: #242424;
 }

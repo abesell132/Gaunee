@@ -10,14 +10,16 @@ class SingleUnitForm extends Component {
   constructor() {
     super();
     this.state = {
-      type: "Single-Unit",
-      availability: "Availability",
-      state: "State",
-      propertyName: "",
       houseNumber: "",
       streetName: "",
       city: "",
-      zipcode: ""
+      state: "State",
+      zipcode: "",
+      numUnits: "",
+
+      // type: "Single-Unit",
+      // availability: "Availability",
+      // propertyName: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -28,33 +30,32 @@ class SingleUnitForm extends Component {
 
   onChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
   onStateSelect(eventKey, event) {
     console.log(event.target.innerHTML);
     this.setState({
-      state: event.target.innerHTML
+      state: event.target.innerHTML,
     });
   }
 
   onAvailabilitySelect(eventKey, event) {
     console.log(event.target.innerHTML);
     this.setState({
-      availability: event.target.innerHTML
+      availability: event.target.innerHTML,
     });
   }
   onFormSubmit(e) {
     e.preventDefault();
     let propertyData = {
-      name: this.state.propertyName,
-      type: this.state.type,
       houseNumber: this.state.houseNumber,
       streetName: this.state.streetName,
       city: this.state.city,
       state: this.state.state,
-      zipcode: this.state.zipcode
+      zipcode: this.state.zipcode,
+      numUnits: this.state.numUnits,
     };
     this.props.addProperty(propertyData);
     this.props.onSubmit();
@@ -64,21 +65,18 @@ class SingleUnitForm extends Component {
     let unitAvailibilityOptions = [
       {
         label: "Available",
-        value: "available"
+        value: "available",
       },
       {
         label: "Unvavailable",
-        value: "unavailable"
-      }
+        value: "unavailable",
+      },
     ];
 
     return (
       <div className="single-unit-form">
         <form onSubmit={this.onFormSubmit}>
-          <h3>Property Information</h3>
-          <p>You will be able to change this information later.</p>
-
-          <div className="flex flex-2">
+          {/* <div className="flex flex-2">
             <TextFieldGroup
               type="text"
               placeholder="Property Name"
@@ -94,49 +92,54 @@ class SingleUnitForm extends Component {
               value={this.state.availability}
               onSelect={this.onAvailabilitySelect}
             />
-          </div>
-          <div className="flex flex-3">
+          </div> */}
+          <div className="flex flex-2">
             <TextFieldGroup
               type="text"
-              placeholder="House Number"
+              label="House Number"
+              placeholder="123"
               name="houseNumber"
               value={this.state.houseNumber}
               onChange={this.onChange}
             />
             <TextFieldGroup
               type="text"
-              placeholder="Street Name"
+              label={"Street Name"}
+              placeholder="Sunset Avenue"
               name="streetName"
               value={this.state.streetName}
               onChange={this.onChange}
             />
-            <TextFieldGroup
-              type="text"
-              placeholder="City"
-              name="city"
-              value={this.state.city}
-              onChange={this.onChange}
-            />
           </div>
-          <div className="flex flex-2">
+          <div className="flex flex-3">
+            <TextFieldGroup type="text" label="City" name="city" placeholder="New York City" value={this.state.city} onChange={this.onChange} />
             <SelectListGroup
               name={this.state.state}
               className="state-dropdown-list"
-              placeholder="State"
+              label="State"
               options={states}
               value={this.state.state}
               onSelect={this.onStateSelect}
             />
+            <TextFieldGroup type="text" label="Zipcode" name="zipcode" placeholder="12345" value={this.state.zipcode} onChange={this.onChange} />
+          </div>
+          <div class="flex flex-3">
             <TextFieldGroup
-              type="text"
-              placeholder="Zipcode"
-              name="zipcode"
-              value={this.state.zipcode}
+              type="number"
+              label="Number of Units"
+              name="numUnits"
+              placeholder="4"
+              value={this.state.numUnits}
               onChange={this.onChange}
             />
           </div>
+          {/* <br />
+          <hr />
 
-          <div className="flex flex-3"></div>
+          <div className="flex flex-3">
+            <TextFieldGroup type="text" label="Bedrooms" name="bedrooms" placeholder="2" value={this.state.bedrooms} onChange={this.onChange} />
+            <TextFieldGroup type="text" label="Bathrooms" name="bathrooms" placeholder="2" value={this.state.bathrooms} onChange={this.onChange} />
+          </div> */}
           <button type="submit">Add Property</button>
         </form>
       </div>
@@ -144,12 +147,9 @@ class SingleUnitForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   property: state.property,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { addProperty }
-)(withRouter(SingleUnitForm));
+export default connect(mapStateToProps, { addProperty })(withRouter(SingleUnitForm));

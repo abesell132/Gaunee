@@ -1,0 +1,113 @@
+#message-center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#message-center .conversations {
+  height: 100%;
+  width: 20%;
+  background: white;
+}
+
+#message-center .conversations .head {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#message-center .conversations .contact {
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#message-center .conversations .contact:hover {
+  background: #efefef;
+  cursor: pointer;
+}
+
+#message-center .conversations .contact .unread {
+  background: red;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+}
+
+#message-center .conversations .contact:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+#message-center .conversation {
+  height: 100%;
+  width: 80%;
+  background: #eee;
+  padding: 20px;
+}
+
+#message-center .conversation .messages {
+  height: calc(100% - 66px);
+  margin-bottom: 20px;
+  flex-direction: column-reverse;
+  display: flex;
+  max-height: calc(100% - 66px);
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+#message-center .conversation .messages .message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0 5px;
+}
+
+#message-center .conversation .messages .message.sent {
+  flex-direction: row-reverse;
+}
+
+#message-center .conversation .messages .message .content {
+  background: white;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 40%;
+}
+
+#message-center .conversation .messages .message.sent .content {
+  background: #28ae60;
+  color: #fff;
+}
+
+#message-center .conversation .messages .message .time {
+  margin: 0 10px;
+  font-size: 13px;
+}
+
+#message-center .conversation .compose {
+  display: flex;
+  align-items: center;
+}
+#message-center .conversation .compose input[type="text"] {
+  width: 100%;
+  border-radius: 50px;
+  border: 1px solid #eee;
+  font-size: 16px;
+  padding: 10px 15px;
+  outline: none !important;
+}
+
+#message-center .conversation .compose input[type="submit"] {
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: none;
+  background: #28ae60;
+  color: white;
+  margin-left: 10px;
+}

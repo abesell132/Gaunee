@@ -16,7 +16,7 @@ class Sidebar extends Component {
       activeItem: "Dashboard",
       notificationsOpen: false,
       currentNotifs: 1,
-      searchProperties: false
+      searchProperties: false,
     };
 
     this.onClick = this.onClick.bind(this);
@@ -44,7 +44,7 @@ class Sidebar extends Component {
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
-      activeItem: nextProps.siteMeta.activePage
+      activeItem: nextProps.siteMeta.activePage,
     });
   }
 
@@ -56,20 +56,20 @@ class Sidebar extends Component {
       return;
     }
     this.setState({
-      notificationsOpen: true
+      notificationsOpen: true,
     });
   }
 
   closeNotificationDropdown() {
     this.setState({
-      notificationsOpen: false
+      notificationsOpen: false,
     });
   }
 
   onClick(e) {
     this.closeNotificationDropdown();
     this.setState({
-      activeItem: e.target.id
+      activeItem: e.target.id,
     });
   }
 
@@ -77,12 +77,12 @@ class Sidebar extends Component {
     if (this.state.searchProperties) {
       // Close
       this.setState({
-        searchProperties: false
+        searchProperties: false,
       });
     } else {
       // Open
       this.setState({
-        searchProperties: true
+        searchProperties: true,
       });
     }
   }
@@ -95,38 +95,24 @@ class Sidebar extends Component {
       hasNotifs = false;
     }
 
-    let properties = Object.values(this.props.properties.properties).map(
-      property => (
-        <div className="property-container" key={property._id}>
-          <Link
-            to="/dashboard/properties"
-            onClick={this.updateSiteMetaProperty}
-            name={property._id}
-          >
-            <p key={property.name}>{property.name}</p>
-          </Link>
-        </div>
-      )
-    );
+    let properties = Object.values(this.props.properties.properties).map((property, index) => (
+      <div className="property-container" key={property._id}>
+        <Link to={`/dashboard/properties/${index}`} onClick={this.updateSiteMetaProperty} name={property._id}>
+          <p key={property.name}>
+            {property.houseNumber} {property.streetName}, {property.city}{" "}
+          </p>
+        </Link>
+      </div>
+    ));
     return (
       <div className="sidebar-container ">
         <div className="main-nav ">
           <div className="profile-icon-container">
-            <div
-              className={"profile-nav-icon"}
-              id={this.state.name}
-              onClick={this.state.onClick}
-            >
+            <div className={"profile-nav-icon"} id={this.state.name} onClick={this.state.onClick}>
               <i className="far fa-user" id={this.state.name} />
             </div>
           </div>
-          <MainNavItem
-            activeItem={this.state.activeItem}
-            name="Dashboard"
-            icon="fa fa-home"
-            location="/dashboard"
-            onClick={this.onClick}
-          />
+          <MainNavItem activeItem={this.state.activeItem} name="Dashboard" icon="fa fa-home" location="/dashboard" onClick={this.onClick} />
 
           <MainNavItem
             activeItem={this.state.activeItem}
@@ -149,26 +135,10 @@ class Sidebar extends Component {
             location="/dashboard/messages"
             onClick={this.onClick}
           />
-          <MainNavItem
-            activeItem={this.state.activeItem}
-            name="Addons"
-            icon="fas fa-box-open"
-            location="/dashboard/addons"
-            onClick={this.onClick}
-          />
-          <MainNavItem
-            activeItem={this.state.activeItem}
-            name="Settings"
-            icon="fa fa-cog"
-            location="/dashboard/settings"
-            onClick={this.onClick}
-          />
+          <MainNavItem activeItem={this.state.activeItem} name="Addons" icon="fas fa-box-open" location="/dashboard/addons" onClick={this.onClick} />
+          <MainNavItem activeItem={this.state.activeItem} name="Settings" icon="fa fa-cog" location="/dashboard/settings" onClick={this.onClick} />
           <div className="help-button">
-            <div
-              className={"main-nav-icon"}
-              id={this.name}
-              onClick={this.onClick}
-            >
+            <div className={"main-nav-icon"} id={this.name} onClick={this.onClick}>
               <i className="fas fa-question-circle" />
               <div>Help</div>
             </div>
@@ -195,10 +165,7 @@ class Sidebar extends Component {
                   </div>
                 </div>
                 <div className="property-icon">
-                  <i
-                    className="fas fa-search"
-                    onClick={this.toggleSearchInput}
-                  />
+                  <i className="fas fa-search" onClick={this.toggleSearchInput} />
                   <div>
                     <span>Search</span>
                   </div>
@@ -207,7 +174,7 @@ class Sidebar extends Component {
             </div>
             <input
               className={classnames("sidebar-search-form", {
-                "search-properties": this.state.searchProperties
+                "search-properties": this.state.searchProperties,
               })}
             />
           </div>
@@ -225,15 +192,12 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   properties: PropTypes.object.isRequired,
-  siteMeta: PropTypes.object.isRequired
+  siteMeta: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   properties: state.properties,
-  siteMeta: state.siteMeta
+  siteMeta: state.siteMeta,
 });
 
-export default connect(
-  mapStateToProps,
-  { updateActiveProperty }
-)(Sidebar);
+export default connect(mapStateToProps, { updateActiveProperty })(Sidebar);

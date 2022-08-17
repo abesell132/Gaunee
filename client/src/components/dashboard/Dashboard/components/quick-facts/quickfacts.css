@@ -59,14 +59,14 @@
   background: #8e44ad;
 }
 
-#tenants {
+.quick-facts-container #tenants {
   background: #2ecc71;
 }
-#tenants .icon-container {
+.quick-facts-container #tenants .icon-container {
   background: #27ae60;
 }
 
-#messages {
+.quick-facts-container #messages {
   background: #f1c40f;
 }
 

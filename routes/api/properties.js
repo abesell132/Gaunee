@@ -1,73 +1,107 @@
 const express = require("express");
 const router = express.Router();
-const { ObjectId } = require("mongodb");
-
 const mongoose = require("mongoose");
 const passport = require("passport");
 
 const Property = require("../../models/Property");
+const Unit = require("../../models/Unit");
+const { deleteProperties } = require("./properties.fncs");
 
-// @route   GET api/properties/test
-// @desc    Tests post route
-// @access  Public
-router.get("/test", (req, res) => res.json({ msg: "Properties Works" }));
+router.post("/create", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  let units = await emptyUnits(req.body.numUnits);
 
-// @route   GET api/properties/all
-// @desc    Tests post route
-// @access  Public
-router.get(
-  "/all",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    console.log("Received");
-    Property.find({
-      ownerID: mongoose.Types.ObjectId(req.user.id)
+  const newProperty = await new Property({
+    ownerID: req.user.id,
+    houseNumber: req.body.houseNumber,
+    streetName: req.body.streetName,
+    city: req.body.city,
+    state: req.body.state,
+    zipcode: req.body.zipcode,
+    units,
+  });
+
+  try {
+    const property = await newProperty.save();
+    await res.json(property);
+  } catch (e) {
+    res.status(404).json({ msg: "Error Creating Property" });
+    console.log(e);
+  }
+});
+
+router.get("/all", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  Property.find()
+    .populate("units")
+    .populate({
+      path: "units",
+      populate: {
+        path: "tenants",
+        model: "tenants",
+      },
     })
-      .then(result => {
-        console.log(result);
-        res.json(result);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  }
-);
-
-// @route   GET api/properties/create
-// @desc    Tests post route
-// @access  Public
-router.post(
-  "/create",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    let propertyName = req.body.name;
-    if (!req.body.name) {
-      propertyName =
-        req.body.houseNumber + " " + req.body.streetName + " " + req.body.city;
-    }
-
-    const newProperty = new Property({
-      ownerID: req.user.id,
-      name: propertyName,
-      type: req.body.type,
-      houseNumber: req.body.houseNumber,
-      streetName: req.body.streetName,
-      city: req.body.city,
-      state: req.body.state,
-      zipcode: req.body.zipcode
+    .populate({
+      path: "units",
+      populate: {
+        path: "tenants",
+        populate: {
+          path: "leases",
+          model: "leases",
+        },
+      },
+    })
+    .exec(function (err, docs) {
+      if (err) {
+        res.status(500).send("Fetching Properties Failed");
+        return console.log(err);
+      }
+      res.json(docs);
     });
+});
 
-    newProperty
-      .save()
-      .then(property => {
-        res.json(property);
-        // const newProfile = new Profile({
-        //   firstName: req.body.name,
-        //   user: mongoose.Types.ObjectId(user._id)
-        // });
-      })
-      .catch(err => console.log(err));
+router.post("/update", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  let propertyID = req.body.propertyID;
+  let updates = req.body;
+  delete updates.propertyID;
+
+  try {
+    let doc = await Property.findOneAndUpdate({ _id: mongoose.Types.ObjectId(propertyID) }, updates, { new: true });
+    console.log(doc);
+    await res.json({ msg: "Property updated" });
+  } catch (e) {
+    res.status(404).json({ msg: "Error updating property" });
+    console.log(e);
   }
-);
+});
+
+router.post("/delete", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  let propertyID = req.body.propertyID;
+
+  try {
+    await deleteProperties(propertyID);
+    await res.json({ msg: "Property Deleted" });
+  } catch (e) {
+    res.status(404).json({ msg: "Error Deleting Property" });
+    console.log(e);
+  }
+});
 
 module.exports = router;
+
+async function emptyUnits(numUnits) {
+  let units = [];
+
+  for (let i = 0; i < numUnits; i++) {
+    const newUnit = new Unit({
+      identifier: `Unit ${i + 1}`,
+      availability: "available",
+      monthlyRent: 0,
+      securityDeposit: 0,
+      tenants: [],
+    });
+
+    const unit = await newUnit.save();
+    units.push(mongoose.Types.ObjectId(unit._id));
+  }
+
+  return units;
+}

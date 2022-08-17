@@ -5,36 +5,34 @@ const PropertySchema = new Schema({
   ownerID: {
     type: Schema.Types.ObjectId,
     ref: "users",
-    required: true
-  },
-  type: {
-    //   House, Building, Multi-Building
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: false
+    required: true,
   },
   houseNumber: {
-    type: String
+    type: String,
+    required: true,
   },
   streetName: {
     type: String,
-    required: true
+    required: true,
   },
   city: {
     type: String,
-    required: true
+    required: true,
   },
   state: {
     type: String,
-    required: true
+    required: true,
   },
   zipcode: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  units: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "units",
+    },
+  ],
 });
 
 module.exports = Property = mongoose.model("properties", PropertySchema);

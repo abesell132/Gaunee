@@ -159,6 +159,11 @@ hr {
   height: calc(100vh - 111px);
   background: #f3f5f9;
   padding: 20px;
+  overflow-y: scroll;
+}
+#home .dashboard-content {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .heading-row {
@@ -171,7 +176,6 @@ hr {
 }
 .heading-row h1,
 .heading-row h1 a {
-  font-family: "Roboto";
   margin-bottom: 0;
   text-align: center;
   font-weight: 400;
@@ -190,4 +194,29 @@ hr {
 .bottom-row-container {
   height: 100%;
   display: flex;
+}
+
+.dashboard-content::-webkit-scrollbar,
+.dashboard-content *::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.dashboard-content::-webkit-scrollbar-track,
+.dashboard-content *::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+/* Handle */
+.dashboard-content::-webkit-scrollbar-thumb,
+.dashboard-content *::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+.dashboard-content::-webkit-scrollbar-thumb:hover,
+.dashboard-content *::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  cursor: all-scroll;
 }

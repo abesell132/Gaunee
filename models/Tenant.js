@@ -5,28 +5,26 @@ const Schema = mongoose.Schema;
 const TenantSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
     type: String,
-    requird: true
+    requird: true,
   },
-  homePhone: {
+  phone: {
     type: String,
-    requird: false
-  },
-  workPhone: {
-    type: String,
-    requird: false
+    required: true,
   },
   email: {
     type: String,
-    required: false
+    required: false,
   },
-  userID: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  }
+  leases: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "leases",
+    },
+  ],
 });
 
 module.exports = Tenant = mongoose.model("tenants", TenantSchema);

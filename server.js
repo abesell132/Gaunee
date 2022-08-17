@@ -6,18 +6,15 @@ var cors = require("cors");
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
-const apartments = require("./routes/api/apartments");
 const properties = require("./routes/api/properties");
-const buildings = require("./routes/api/buildings");
 const tenants = require("./routes/api/tenants");
+const units = require("./routes/api/units");
+const leases = require("./routes/api/leases");
+const payments = require("./routes/api/payments");
 
 const app = express();
 
-// var corsOptions = {
-//   origin: "*"
-// };
 app.use(cors());
-// app.options("*", cors(corsOptionsDelegate));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,12 +24,10 @@ app.use(bodyParser.json());
 const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
-console.log(db);
 mongoose
   .connect(db, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true,
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
@@ -44,12 +39,13 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Use Routes
-app.use("/api/apartments", apartments);
-app.use("/api/buildings", buildings);
 app.use("/api/profile", profile);
 app.use("/api/properties", properties);
 app.use("/api/tenants", tenants);
+app.use("/api/units", units);
 app.use("/api/users", users);
+app.use("/api/leases", leases);
+app.use("/api/payments", payments);
 
 const port = process.env.PORT || 5000;
 

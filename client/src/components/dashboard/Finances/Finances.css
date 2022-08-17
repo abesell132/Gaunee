@@ -1,0 +1,383 @@
+.hidden {
+  display: none;
+}
+
+#finances .dashboard-content {
+  overflow-y: auto;
+  position: relative;
+}
+
+#finances .graph {
+  margin-bottom: 40px;
+}
+
+#finances .graph .expenses-chart {
+  height: 340px;
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: white;
+  padding: 20px 10px 10px 20px;
+}
+
+#finances .cashflow {
+  width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#finances .cashflow .cashflow-header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#finances .cashflow .cashflow-header h3 {
+  margin-bottom: 0 !important;
+}
+
+#finances .cashflow .cashflow-header button {
+  padding: 10px 30px;
+  border: none;
+  background: #28ae60;
+  color: white;
+  border-radius: 100px;
+}
+
+#finances .cashflow .cashflow-body .box {
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+  border: 3px solid #e0e3ec;
+  margin-bottom: 30px;
+}
+
+#finances .cashflow table {
+  width: 100%;
+}
+
+#finances .cashflow table strong {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+#finances .cashflow table thead {
+  border-bottom: 2px solid #e0e3ec;
+}
+#finances .cashflow table th {
+  white-space: nowrap;
+  padding: 10px 10px 5px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+#finances .cashflow table tbody div {
+  width: 100%;
+}
+
+#finances .cashflow table tbody tr.description td {
+  background: #eaecf2;
+  padding: 20px !important;
+  width: 100%;
+}
+
+#finances .cashflow table tbody tr.description td .flex {
+  justify-content: space-evenly;
+}
+
+#finances .cashflow table tbody tr.description td .flex label {
+  font-weight: 600;
+  line-height: 1;
+}
+
+#finances .cashflow table tbody tr.description .upcoming-charges-actions,
+#finances .cashflow table tbody tr.description .actions {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 20%;
+}
+
+#finances .cashflow table tbody tr.description .upcoming-charges-actions {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#finances .cashflow table tbody tr.description .upcoming-charges-actions i,
+#finances .cashflow table tbody tr.description .actions i {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+#finances .cashflow table tbody tr.description .upload {
+  padding: 30px 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+#finances .cashflow table tbody tr.description .upload i {
+  font-size: 40px;
+  color: #069fff;
+  margin-bottom: 10px;
+}
+
+#finances .cashflow table tbody tr.description .upload span {
+  font-weight: 600;
+}
+
+#finances .cashflow table tbody tr.description button {
+  padding: 10px 20px;
+  margin-left: 15px;
+  border-radius: 4px;
+  border: none;
+  background: #28ae60;
+  color: white;
+}
+
+#finances .cashflow table tbody tr.description button:hover {
+  background: #0f9f4e;
+}
+
+#finances .cashflow table tbody tr:not(.description):hover {
+  cursor: pointer;
+  background: #f7f8fa;
+}
+
+#finances .cashflow table tr td {
+  padding: 20px 10px;
+  line-height: 1.2;
+}
+
+#finances .cashflow-popup {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+#finances .cashflow-popup-content {
+  width: 700px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  border: 3px solid #e0e3ec;
+}
+
+#finances .cashflow-popup label {
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+}
+
+#finances .cashflow-popup button {
+  padding: 10px 20px;
+  border: none;
+  margin-right: 5px;
+  background: #eaecf2;
+  color: #242424;
+}
+
+#finances .cashflow-popup button.selected {
+  background: #28ae60;
+  color: white;
+}
+
+#finances .cashflow-popup form .flex {
+  width: 60%;
+}
+
+#finances .cashflow-popup form .property-select {
+  width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+#finances .cashflow-popup form .property-select > div {
+  width: 50%;
+}
+
+#finances .cashflow-popup form .property-select select {
+  width: calc(100% - 10px);
+}
+
+#finances .cashflow-popup form input {
+  margin-right: 10px;
+  width: 100%;
+}
+
+#finances .cashflow-popup form .flex input {
+  width: calc(100% - 10px);
+}
+
+#finances .cashflow-popup form select {
+  width: 60%;
+}
+#finances .cashflow-popup form textarea {
+  width: 100%;
+  height: 100px;
+}
+
+#finances .cashflow-popup form input,
+#finances .cashflow-popup form select,
+#finances .cashflow-popup form textarea {
+  color: #042238;
+  background-color: #fff;
+  border: 1px solid #acb9c8;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+#finances .cashflow-popup form .form-footer {
+  margin: 10px 0;
+}
+
+#finances .cashflow-body .body-row.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#finances .cashflow-body .body-row.flex > div {
+  width: 50%;
+}
+
+#finances .cashflow-body .body-row.flex > div h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+#finances .cashflow .item-date {
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#finances .cashflow .item {
+  box-shadow: 0px 0 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#finances .cashflow .item .head {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  padding: 15px 20px;
+}
+
+#finances .cashflow .item .content {
+  padding: 15px 20px 25px;
+}
+
+#finances .cashflow .item .content h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+#finances .cashflow .item .content form {
+  display: flex;
+  justify-content: space-between;
+}
+
+#finances .cashflow .item .content form > div {
+  display: flex;
+  align-items: center;
+}
+#finances .cashflow .item .content form .form-fields {
+  width: 75%;
+}
+
+#finances .cashflow .item .content form .form-fields .name {
+  width: 50%;
+}
+
+#finances .cashflow .item .content form > div > div,
+#finances .cashflow .item .content form > div > button {
+  margin: 0 10px 0 0;
+}
+
+#finances .cashflow .item .content form .form-fields label,
+#finances .cashflow .item .content form .form-fields .checkboxes > div {
+  margin-right: 10px;
+  margin-bottom: 0;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#finances .cashflow .item .content form .form-fields .checkboxes label {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+#finances .cashflow .item .content form .form-fields input {
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+#finances .cashflow .item .content form .form-fields input[type="text"] {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#finances .cashflow .item .content form .form-fields input[type="radio"] {
+  height: 30px;
+  vertical-align: middle;
+}
+
+#finances .cashflow .item .name {
+  font-weight: 500;
+}
+
+#finances .cashflow .item .amount {
+  color: #28ae60;
+}
+
+#finances .cashflow .item .amount::before {
+  content: "+";
+}
+
+#finances .cashflow .item.expense .amount {
+  color: #ed796d;
+}
+#finances .cashflow .item.expense .amount::before {
+  content: "-";
+}
+
+#finances .cashflow .item .content form .form-footer button {
+  border: none;
+  background: #28ae60;
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: white;
+}
+
+#finances .cashflow .item .content form .form-footer button.delete {
+  background-color: #ed796d;
+}
