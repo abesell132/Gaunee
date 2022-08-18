@@ -17,7 +17,7 @@ class PropertiesBox extends Component {
             </div>
             <div className="line2">
               <small>
-                {property.city}, {property.state.split("-")[0]} {property.zipcode}
+                {property.city}, {property.state} {property.zipcode}
               </small>
             </div>
           </div>

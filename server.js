@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const path = require("path");
 var cors = require("cors");
 
 const users = require("./routes/api/users");
@@ -19,6 +20,14 @@ app.use(cors());
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+if (process.argv[2] === "prod") {
+  app.use(express.static(path.join(__dirname, "build")));
+
+  app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
 
 // DB Config
 const db = require("./config/keys").mongoURI;
