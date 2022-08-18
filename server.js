@@ -21,7 +21,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (process.argv[2] === "prod") {
+if (!process.argv[2] === "dev") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
   app.get("/", function (req, res) {
