@@ -21,12 +21,22 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-if (!process.argv[2] === "dev") {
+if (process.argv[2] !== "dev") {
+  console.log("Launching in Production Mode");
   app.use(express.static(path.join(__dirname, "client/build")));
 
   app.get("/", function (req, res) {
+	try {
+
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
+
+	} catch(e){
+	console.log(e)
+	}
   });
+} else {
+console.log("Lanching in Development Mode");
+
 }
 
 // DB Config
@@ -56,6 +66,6 @@ app.use("/api/users", users);
 app.use("/api/leases", leases);
 app.use("/api/payments", payments);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
