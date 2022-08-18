@@ -11,8 +11,10 @@ module.exports = {
         for (let propertyID of propertyIDs) {
           let property = await Property.findOne({ _id: mongoose.Types.ObjectId(propertyID) }).populate("units");
 
-          for (let unit of property.units) {
-            await deleteUnits(unit.id);
+          if (property.units) {
+            for (let unit of property.units) {
+              await deleteUnits(unit.id);
+            }
           }
         }
 
