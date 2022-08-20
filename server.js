@@ -26,17 +26,10 @@ if (process.argv[2] !== "dev") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
   app.get("/", function (req, res) {
-	try {
-
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
-
-	} catch(e){
-	console.log(e)
-	}
   });
 } else {
-console.log("Lanching in Development Mode");
-
+  console.log("Lanching in Development Mode");
 }
 
 // DB Config
